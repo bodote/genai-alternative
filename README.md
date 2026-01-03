@@ -1,6 +1,6 @@
 # 🔍 Sherlock Holmes RAG Assistant
 
-A Retrieval Augmented Generation (RAG) web application that answers questions about the classic Sherlock Holmes stories by Arthur Conan Doyle.
+Spring Boot web app that builds a grounded, searchable knowledge base from the original Sherlock Holmes texts and answers questions with RAG (retrieval + guardrailed generation).
 
 ## Overview
 
@@ -213,4 +213,3 @@ open out/de/tobiasroeser/mill/jacoco/Jacoco/jacocoReportFull.dest/html/index.htm
 ## License
 
 Public domain texts from Project Gutenberg. Application code under Apache 2.0.
-
