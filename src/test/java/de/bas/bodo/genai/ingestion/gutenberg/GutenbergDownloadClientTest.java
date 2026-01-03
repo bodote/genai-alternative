@@ -2,7 +2,6 @@ package de.bas.bodo.genai.ingestion.gutenberg;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class GutenbergDownloadClientTest {
 
 	@Test
 	void downloadsCanonicalTextAndStoresIt() {
-		RecordingHttpClient httpClient = new RecordingHttpClient(Map.of(
+		RecordingGutenbergHttpClient httpClient = RecordingGutenbergHttpClient.withResponses(Map.of(
 				WORK_PAGE_URL, WORK_PAGE_HTML,
 				TEXT_URL, TEXT_BODY
 		));
@@ -36,25 +35,6 @@ class GutenbergDownloadClientTest {
 		assertThat(store.savedWorkId()).isEqualTo(WORK_ID);
 		assertThat(store.savedText()).isEqualTo(TEXT_BODY);
 		assertThat(store.savedSourceUrl()).isEqualTo(TEXT_URL);
-	}
-
-	private static final class RecordingHttpClient implements GutenbergHttpClient {
-		private final Map<String, String> responses;
-		private final java.util.List<String> requestedUrls = new java.util.ArrayList<>();
-
-		private RecordingHttpClient(Map<String, String> responses) {
-			this.responses = new HashMap<>(responses);
-		}
-
-	@Override
-	public String get(String url) {
-		requestedUrls.add(url);
-		return java.util.Objects.requireNonNull(responses.get(url));
-	}
-
-		private java.util.List<String> requestedUrls() {
-			return java.util.List.copyOf(requestedUrls);
-		}
 	}
 
 	private static final class RecordingTextStore implements GutenbergTextStore {

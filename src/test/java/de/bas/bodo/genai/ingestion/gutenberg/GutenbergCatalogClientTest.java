@@ -34,7 +34,7 @@ class GutenbergCatalogClientTest {
 
 	@Test
 	void fetchesWorksForAuthor() {
-		RecordingHttpClient httpClient = new RecordingHttpClient(SAMPLE_HTML);
+		RecordingGutenbergHttpClient httpClient = RecordingGutenbergHttpClient.fixedResponse(SAMPLE_HTML);
 		GutenbergCatalogClient client = new GutenbergCatalogClient(httpClient);
 
 		List<GutenbergWork> works = client.fetchWorksByAuthorId(AUTHOR_ID);
@@ -46,24 +46,5 @@ class GutenbergCatalogClientTest {
 						tuple(1661, SHERLOCK_TITLE),
 						tuple(2852, HOUND_TITLE)
 				);
-	}
-
-	private static final class RecordingHttpClient implements GutenbergHttpClient {
-		private final String response;
-		private String lastUrl = "";
-
-		private RecordingHttpClient(String response) {
-			this.response = response;
-		}
-
-		@Override
-		public String get(String url) {
-			this.lastUrl = url;
-			return response;
-		}
-
-		private String lastUrl() {
-			return lastUrl;
-		}
 	}
 }

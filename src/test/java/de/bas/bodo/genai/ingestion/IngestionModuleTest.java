@@ -3,11 +3,11 @@ package de.bas.bodo.genai.ingestion;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-import de.bas.bodo.genai.ingestion.embedding.EmbeddingClient;
 import de.bas.bodo.genai.retrieval.EmbeddedChunk;
-import de.bas.bodo.genai.retrieval.RetrievalStore;
-import java.util.ArrayList;
+import de.bas.bodo.genai.testing.RecordingEmbeddingClient;
+import de.bas.bodo.genai.testing.RecordingRetrievalStore;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,12 @@ class IngestionModuleTest {
 
 	@Autowired
 	private RecordingRetrievalStore retrievalStore;
+
+	@BeforeEach
+	void resetFakes() {
+		embeddingClient.reset();
+		retrievalStore.clear();
+	}
 
 	@Test
 	void ingestsRawTextThroughPublicApi() {
@@ -66,51 +72,12 @@ class IngestionModuleTest {
 	static class TestConfig {
 		@Bean
 		RecordingEmbeddingClient embeddingClient() {
-			return new RecordingEmbeddingClient();
+			return RecordingEmbeddingClient.incremental();
 		}
 
 		@Bean
 		RecordingRetrievalStore retrievalStore() {
 			return new RecordingRetrievalStore();
-		}
-	}
-
-	static final class RecordingEmbeddingClient implements EmbeddingClient {
-		private final List<List<Float>> providedEmbeddings = new ArrayList<>();
-		private List<String> requestedTexts = List.of();
-
-		@Override
-		public List<float[]> embedAll(List<String> texts) {
-			requestedTexts = List.copyOf(texts);
-			providedEmbeddings.clear();
-			List<float[]> embeddings = new ArrayList<>();
-			for (int i = 0; i < texts.size(); i++) {
-				float[] embedding = new float[] {i + 1.0f, i + 2.0f};
-				embeddings.add(embedding);
-				providedEmbeddings.add(List.of(embedding[0], embedding[1]));
-			}
-			return embeddings;
-		}
-
-		private List<String> requestedTexts() {
-			return requestedTexts;
-		}
-
-		private List<List<Float>> providedEmbeddings() {
-			return List.copyOf(providedEmbeddings);
-		}
-	}
-
-	static final class RecordingRetrievalStore implements RetrievalStore {
-		private final List<EmbeddedChunk> savedChunks = new ArrayList<>();
-
-		@Override
-		public void addDocuments(List<EmbeddedChunk> chunks) {
-			savedChunks.addAll(chunks);
-		}
-
-		private List<EmbeddedChunk> savedChunks() {
-			return List.copyOf(savedChunks);
 		}
 	}
 }
