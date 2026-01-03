@@ -16,15 +16,13 @@ public final class TextChunker {
 		}
 
 		List<String> chunks = new ArrayList<>();
-		int start = 0;
 		int length = text.length();
-		while (start < length) {
+		for (int start = 0; start < length; start += maxLength - overlap) {
 			int end = Math.min(start + maxLength, length);
 			chunks.add(text.substring(start, end));
 			if (end == length) {
 				break;
 			}
-			start = end - overlap;
 		}
 		return List.copyOf(chunks);
 	}

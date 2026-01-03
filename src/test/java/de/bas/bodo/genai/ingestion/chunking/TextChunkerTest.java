@@ -18,6 +18,11 @@ class TextChunkerTest {
 	private static final String WHITESPACE_ONLY = "   \n\t  ";
 	private static final String SHORT_TEXT = "Short line.";
 	private static final String LONG_WORD = "Supercalifragilistic";
+	private static final String EXACT_TEXT = "Intro line.\n\nSecond line.";
+	private static final String EXACT_PARAGRAPH = "Alpha beta. Gamma.";
+	private static final String EXTRA_PARAGRAPH = "Tail.";
+	private static final String EXACT_SENTENCE_WITH_DOUBLE_SPACE = "Alpha  beta.";
+	private static final String EXTRA_SENTENCE = "Tail.";
 
 	@Nested
 	@DisplayName("chunk")
@@ -36,7 +41,8 @@ class TextChunkerTest {
 			TextChunker chunker = new TextChunker();
 
 			assertThatThrownBy(() -> chunker.chunk(TEXT, 0, 0))
-					.isInstanceOf(IllegalArgumentException.class);
+					.isInstanceOf(IllegalArgumentException.class)
+					.hasMessage("maxLength must be positive");
 		}
 
 		@Test
@@ -78,6 +84,15 @@ class TextChunkerTest {
 	@DisplayName("chunkRecursively")
 	class ChunkRecursively {
 		@Test
+		void keepsExactLengthTextTogether() {
+			TextChunker chunker = new TextChunker();
+
+			int maxLength = EXACT_TEXT.length();
+			List<String> chunks = chunker.chunkRecursively(EXACT_TEXT, maxLength, 0);
+
+			assertThat(chunks).containsExactly(EXACT_TEXT);
+		}
+		@Test
 		void splitsByParagraphsFirst() {
 			TextChunker chunker = new TextChunker();
 
@@ -86,6 +101,17 @@ class TextChunkerTest {
 			assertThat(chunks).containsExactly("First para.", "Second para.");
 		}
 
+		@Test
+		void keepsParagraphAtExactMaxLength() {
+			TextChunker chunker = new TextChunker();
+
+			int maxLength = EXACT_PARAGRAPH.length();
+			String text = EXACT_PARAGRAPH + "\n\n" + EXTRA_PARAGRAPH;
+
+			List<String> chunks = chunker.chunkRecursively(text, maxLength, 0);
+
+			assertThat(chunks).containsExactly(EXACT_PARAGRAPH, EXTRA_PARAGRAPH);
+		}
 		@Test
 		void returnsEmptyListForWhitespaceOnly() {
 			TextChunker chunker = new TextChunker();
@@ -120,6 +146,18 @@ class TextChunkerTest {
 			List<String> chunks = chunker.chunkRecursively(SENTENCES, 12, 0);
 
 			assertThat(chunks).containsExactly("Alpha beta.", "Gamma delta.");
+		}
+
+		@Test
+		void keepsExactLengthSentenceWithSpacing() {
+			TextChunker chunker = new TextChunker();
+
+			int maxLength = EXACT_SENTENCE_WITH_DOUBLE_SPACE.length();
+			String text = EXACT_SENTENCE_WITH_DOUBLE_SPACE + " " + EXTRA_SENTENCE;
+
+			List<String> chunks = chunker.chunkRecursively(text, maxLength, 0);
+
+			assertThat(chunks).containsExactly(EXACT_SENTENCE_WITH_DOUBLE_SPACE, EXTRA_SENTENCE);
 		}
 
 		@Test
