@@ -177,6 +177,7 @@ find src/test -name "*Test.java" -o -name "*IT.java" | sort > /tmp/tests.txt
    - **Include ALL classes** that will have behaviour: services, controllers, components, event listeners
 
 2. **Implement production code**
+   - proceed only if there is a failing test, otherwise implement the test first
    - Make the unit test pass
    - Keep implementation minimal
    - **One production class = one test class** (for classes with logic)
