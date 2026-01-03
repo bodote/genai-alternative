@@ -56,19 +56,17 @@ public final class TextChunker {
 	}
 
 	private static List<String> splitOnRegex(String text, String regex) {
-		String[] parts = java.util.regex.Pattern.compile(regex).split(text);
-		List<String> result = new ArrayList<>();
-		for (String part : parts) {
-			String trimmed = part.trim();
-			if (!trimmed.isEmpty()) {
-				result.add(trimmed);
-			}
-		}
-		return result;
+		return java.util.regex.Pattern.compile(regex)
+				.splitAsStream(text)
+				.map(String::trim)
+				.filter(part -> !part.isEmpty())
+				.toList();
 	}
 
 	private static List<String> chunkWords(String text, int maxLength, int overlap) {
-		String[] words = java.util.regex.Pattern.compile("\\s+").split(text.trim());
+		List<String> words = java.util.regex.Pattern.compile("\\s+")
+				.splitAsStream(text.trim())
+				.toList();
 		List<String> chunks = new ArrayList<>();
 		StringBuilder current = new StringBuilder();
 		for (String word : words) {
@@ -102,14 +100,16 @@ public final class TextChunker {
 			}
 			String previous = chunks.get(i - 1);
 			String current = chunks.get(i);
-			String[] previousWords = java.util.regex.Pattern.compile("\\s+").split(previous);
-			int start = Math.max(0, previousWords.length - overlap);
+			List<String> previousWords = java.util.regex.Pattern.compile("\\s+")
+					.splitAsStream(previous)
+					.toList();
+			int start = Math.max(0, previousWords.size() - overlap);
 			StringBuilder builder = new StringBuilder();
-			for (int j = start; j < previousWords.length; j++) {
+			for (int j = start; j < previousWords.size(); j++) {
 				if (builder.length() > 0) {
 					builder.append(' ');
 				}
-				builder.append(previousWords[j]);
+				builder.append(previousWords.get(j));
 			}
 			if (builder.length() > 0) {
 				builder.append(' ');

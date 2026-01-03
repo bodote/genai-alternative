@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 class EmbeddingIngestionServiceTest {
 	private static final int WORK_ID = 1661;
 	private static final List<String> CHUNKS = List.of("chunk one", "chunk two");
+	private static final List<Float> FIRST_EMBEDDING = List.of(0.1f, 0.2f);
+	private static final List<Float> SECOND_EMBEDDING = List.of(0.3f, 0.4f);
 
 	@Test
 	void embedsChunksAndStoresResults() {
@@ -27,11 +29,13 @@ class EmbeddingIngestionServiceTest {
 
 		assertThat(embeddingClient.requestedTexts()).isEqualTo(CHUNKS);
 		assertThat(retrievalStore.savedChunks())
-				.extracting(EmbeddedChunk::workId, EmbeddedChunk::index, EmbeddedChunk::text, EmbeddedChunk::embedding)
+				.extracting(EmbeddedChunk::workId, EmbeddedChunk::index, EmbeddedChunk::text)
 				.containsExactly(
-						tuple(WORK_ID, 0, CHUNKS.get(0), firstEmbedding),
-						tuple(WORK_ID, 1, CHUNKS.get(1), secondEmbedding)
+						tuple(WORK_ID, 0, CHUNKS.get(0)),
+						tuple(WORK_ID, 1, CHUNKS.get(1))
 				);
+		assertThat(retrievalStore.savedChunks().get(0).embedding()).isEqualTo(FIRST_EMBEDDING);
+		assertThat(retrievalStore.savedChunks().get(1).embedding()).isEqualTo(SECOND_EMBEDDING);
 	}
 
 	private static final class RecordingEmbeddingClient implements EmbeddingClient {

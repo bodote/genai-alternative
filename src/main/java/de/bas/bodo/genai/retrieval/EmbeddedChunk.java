@@ -1,3 +1,9 @@
 package de.bas.bodo.genai.retrieval;
 
-public record EmbeddedChunk(int workId, int index, String text, float[] embedding) {}
+import java.util.List;
+
+public record EmbeddedChunk(int workId, int index, String text, List<Float> embedding) {
+	public EmbeddedChunk {
+		embedding = List.copyOf(embedding);
+	}
+}
