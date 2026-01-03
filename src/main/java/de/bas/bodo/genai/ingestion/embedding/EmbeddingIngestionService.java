@@ -5,7 +5,9 @@ import de.bas.bodo.genai.retrieval.RetrievalStore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class EmbeddingIngestionService {
 	private final EmbeddingClient embeddingClient;
 	private final RetrievalStore retrievalStore;

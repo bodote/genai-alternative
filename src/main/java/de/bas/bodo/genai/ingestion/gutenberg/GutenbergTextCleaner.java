@@ -2,12 +2,14 @@ package de.bas.bodo.genai.ingestion.gutenberg;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
-final class GutenbergTextCleaner {
+@Component
+public final class GutenbergTextCleaner {
 	private static final String START_PREFIX = "*** START OF THE PROJECT GUTENBERG EBOOK";
 	private static final String END_PREFIX = "*** END OF THE PROJECT GUTENBERG EBOOK";
 
-	String stripBoilerplate(String rawText) {
+	public String stripBoilerplate(String rawText) {
 		String[] lines = rawText.split("\n", -1);
 		List<String> bodyLines = new ArrayList<>();
 		boolean inBody = false;
@@ -34,7 +36,7 @@ final class GutenbergTextCleaner {
 		return String.join("\n", bodyLines).trim();
 	}
 
-	String normalizeWhitespace(String text) {
+	public String normalizeWhitespace(String text) {
 		String normalized = text.replace("\r\n", "\n").replace("\r", "\n");
 		normalized = normalized.replace("\t", " ");
 		normalized = normalized.replaceAll("[ ]{2,}", " ");

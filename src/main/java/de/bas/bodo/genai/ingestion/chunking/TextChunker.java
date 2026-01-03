@@ -2,7 +2,9 @@ package de.bas.bodo.genai.ingestion.chunking;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class TextChunker {
 	public List<String> chunk(String text, int maxLength, int overlap) {
 		if (text.isEmpty()) {

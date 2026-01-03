@@ -1,0 +1,19 @@
+@startuml
+set separator none
+title GenaiApplication
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+Container_Boundary("GenaiApplication.GenaiApplication_boundary", "GenaiApplication", $tags="") {
+  Component(GenaiApplication.GenaiApplication.Retrieval, "Retrieval", $techn="Module", $descr="", $tags="", $link="")
+  Component(GenaiApplication.GenaiApplication.Ingestion, "Ingestion", $techn="Module", $descr="", $tags="", $link="")
+}
+
+Rel(GenaiApplication.GenaiApplication.Ingestion, GenaiApplication.GenaiApplication.Retrieval, "uses", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+@enduml
