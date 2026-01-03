@@ -58,7 +58,7 @@ Public LLM-based chatbots often struggle with detailed questions about classic l
 
 - **Framework**: Spring Boot 3.5, Spring AI 1.1, Spring Modulith
 - **Language**: Java 21
-- **Build**: Mill
+- **Build**: Gradle
 - **AI Provider**: OpenAI (embeddings + chat)
 - **Vector Store**: PostgreSQL with pgvector extension
 - **Testing**: JUnit 5, TestContainers (PostgreSQL), Playwright (E2E)
@@ -108,7 +108,7 @@ docker run -d --name sherlock-postgres \
 ### Running the Application
 
 ```bash
-mill run
+./gradlew bootRun
 ```
 
 Then visit http://localhost:8080 to use the chat interface.
@@ -152,26 +152,26 @@ This project separates **unit tests** (fast, mocked) from **integration tests** 
 
 | Type | File Pattern | Speed | Dependencies | Command |
 |------|--------------|-------|--------------|---------|
-| Unit Tests | `*Test.java` | ~1 second | Mocked | `mill test.testForked` |
-| Integration Tests | `*IT.java` | ~30 seconds | Real (DB, network) | `mill itest.testForked` |
+| Unit Tests | `*Test.java` | ~1 second | Mocked | `./gradlew test` |
+| Integration Tests | `*IT.java` | ~30 seconds | Real (DB, network) | `./gradlew test --tests '*IT'` |
 
 ### Running Tests
 
 ```bash
 # Unit tests only (fast, run frequently during development)
-mill test.testForked
+./gradlew test
 
 # Integration tests only (requires Docker)
-mill itest.testForked
+./gradlew test --tests '*IT'
 
 # Run all tests
-mill test.testForked && mill itest.testForked
+./gradlew test
 
 # Run a specific test class
-mill test.testOnly 'de.bas.bodo.genai.ingestion.IngestionServiceTest'
+./gradlew test --tests 'de.bas.bodo.genai.ingestion.IngestionServiceTest'
 
 # Run tests matching a pattern
-mill test.testOnly 'de.bas.bodo.genai.retrieval.*'
+./gradlew test --tests 'de.bas.bodo.genai.retrieval.*'
 ```
 
 ### E2E Tests with Playwright
@@ -187,25 +187,21 @@ Tests cover:
 Run E2E tests:
 
 ```bash
-mill test.testOnly 'de.bas.bodo.genai.e2e.*'
+./gradlew test --tests 'de.bas.bodo.genai.e2e.*'
 ```
 
 On first run, Playwright will automatically download the required browsers.
 
 ### Test Coverage
 
-Generate test coverage reports using JaCoCo (via mill-jacoco plugin):
+Generate test coverage reports using JaCoCo:
 
 ```bash
 # Run tests and generate coverage report
-./coverage.sh
-
-# Or manually:
-mill test.testForked
-mill de.tobiasroeser.mill.jacoco.Jacoco/jacocoReportFull
+./gradlew test jacocoTestReport
 
 # Open HTML report
-open out/de/tobiasroeser/mill/jacoco/Jacoco/jacocoReportFull.dest/html/index.html
+open build/reports/jacoco/test/html/index.html
 ```
 
 **VS Code/Cursor Integration**: Install the **Coverage Gutters** extension to see coverage inline in the editor. After running tests, use `Cmd+Shift+P` → "Coverage Gutters: Display Coverage".
