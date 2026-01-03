@@ -1,0 +1,122 @@
+---
+description: how to implement new production code 
+alwaysApply: false
+---
+The overall software architecture should follow the Spring Modulith approach.
+
+STARTER_CHARACTER for implementing production code to resolve red tests = ❗
+
+## Principles
+
+1. **Test exists first (TDD)**
+   - Make sure there is a **failing test before implementing any new feature**
+   - See [rules for tests](testing.mdc) for details on how to write tests
+   - This applies to **ALL production classes with behaviour**: services, controllers, components, event listeners, utilities
+
+2. **Implement core logic**
+   - Implement the Java code to satisfy the failing tests
+   - Iterate until all relevant test suites pass
+   - Keep implementation minimal - only what's needed to pass the test
+
+3. **One class, one test**
+   - Every production class with logic requires a corresponding `*Test.java`
+   - **Never skip tests for "infrastructure" or "glue" code** (e.g., `@EventListener`, `@Component`)
+   - Simple DTOs/records without methods can be covered indirectly
+
+4. **Refine and tidy**
+   - Extract repeated literals in tests into constants
+   - Split or reorganize tests into focused files if they become large
+   - Re-run all tests to confirm the full suite is green
+   - **Check coverage** before considering the feature complete
+
+5. **Java package structure**
+   - Use Spring Modulith rules to structure packages
+   - Prefer Java `record` over `class` for data types
+   - Avoid creating redundant/duplicate classes
+
+6. **Module boundaries and data ownership**
+   - Each external resource (database, API, file system) should be **owned by exactly one module**
+   - Other modules access shared resources **through the owning module's API**, never directly
+   - Run `ModularityTests` to verify module dependencies are correct
+   - Generate PlantUML diagrams to visualize and validate architecture
+
+## What Requires a Dedicated Test
+
+| Class Type | Example | Test Required? |
+|------------|---------|----------------|
+| Controllers | `ChatController` | ✅ Yes |
+| Services | `IngestionService` | ✅ Yes |
+| `@Component` / `@EventListener` | `DataInitializer` | ✅ **Yes** |
+| Utility classes | `TextChunker` | ✅ Yes |
+| Records with factory methods | `RagResponse.success()` | ✅ Yes |
+| Simple records (data only) | `BookContent` | ⚠️ Indirect |
+
+## Common Pitfalls to Avoid
+
+| Mistake | Why It's Wrong | Correct Approach |
+|---------|----------------|------------------|
+| "This is just glue code" | `DataInitializer` has logic (counting, logging) | Write a unit test |
+| "Integration tests cover it" | Unit isolation is lost | Unit tests first, then integration |
+| "I'll add tests later" | Tests never get added | **TDD: test first, always** |
+| "One big commit with everything" | Coverage gaps are hidden | Small, focused commits |
+| Copying similar classes | Creates dead/redundant code | Reuse existing classes |
+| Multiple modules accessing same DB | Tight coupling, unclear ownership | **One module owns the resource** |
+| Injecting infrastructure directly | e.g., `VectorStore` in multiple modules | Inject the owning service instead |
+
+## Commit Guidelines
+
+- **Each commit should include production code AND its tests**
+- Never commit production code without corresponding test coverage
+- Keep commits small and focused on one feature/fix
+- Verify coverage is **≥80%** before committing
+
+## Spring Modulith Architecture Rules
+
+### Module Data Ownership
+
+Each shared resource (database, external API, file system) must be **owned by exactly one module**:
+
+| Resource | Owning Module | Exposed API |
+|----------|---------------|-------------|
+| VectorStore (PostgreSQL/pgvector) | `retrieval` | `addDocuments()`, `findStoredBookIds()`, `retrieve()` |
+| External APIs (e.g., OpenAI) | `generation` | `answer()` |
+| Project Gutenberg downloads | `ingestion` | (internal use only) |
+
+### Cross-Module Access Pattern
+
+```
+❌ WRONG: Multiple modules inject infrastructure directly
+┌──────────────┐     ┌──────────────┐
+│  Ingestion   │────▶│ VectorStore  │◀────│  Retrieval  │
+└──────────────┘     └──────────────┘     └─────────────┘
+
+✅ CORRECT: One module owns infrastructure, exposes API
+┌──────────────┐     ┌──────────────────────┐
+│  Ingestion   │────▶│     Retrieval        │
+└──────────────┘     │  (owns VectorStore)  │
+                     │  - addDocuments()    │
+                     │  - retrieve()        │
+                     └──────────────────────┘
+```
+
+### Verification Commands
+
+```bash
+# Verify module boundaries are respected
+mill test.testOnly 'de.bas.bodo.genai.ModularityTests'
+
+# Generate architecture diagrams
+# (diagrams saved to docs/modulith/*.puml)
+```
+
+### Adding a New Module
+
+1. Create package under `de.bas.bodo.genai.<module_name>`
+2. Add `package-info.java` with `@NullMarked`
+3. If the module needs a shared resource:
+   - Check if another module already owns it → use that module's API
+   - If no owner exists → this module becomes the owner
+4. Run `ModularityTests` to verify dependencies
+5. Update PlantUML diagrams and commit them
+
+STARTER_CHARACTER for implementing production code to resolve red tests = ❗
