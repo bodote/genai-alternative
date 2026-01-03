@@ -114,6 +114,20 @@ class IngestionServiceIT {
 - View coverage in VS Code/Cursor with **Coverage Gutters** extension
 - Generate HTML report: `./gradlew jacocoTestReport`
 
+## Mutation Testing (Pitest)
+
+Use Pitest to check whether tests actually detect bugs by mutating bytecode. It helps reveal weak assertions and untested branches that code coverage alone misses.
+
+Run:
+
+```bash
+./gradlew pitest
+```
+
+Notes:
+- If there are no mutable production classes yet, Pitest may report “No mutations found”; this is expected early in the project.
+- Prefer targeting specific packages/classes once real logic exists.
+
 ### Coverage Requirements
 
 | Metric | Minimum Threshold |
