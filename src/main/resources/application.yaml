@@ -1,3 +1,6 @@
 spring:
   application:
     name: genai
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
