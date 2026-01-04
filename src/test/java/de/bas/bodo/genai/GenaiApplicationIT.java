@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 @SpringBootTest
-@Import({GenaiApplicationTests.TestConfig.class, TestcontainersConfiguration.class})
-class GenaiApplicationTests {
+@Import({GenaiApplicationIT.TestConfig.class, TestcontainersConfiguration.class})
+class GenaiApplicationIT {
 
 	@Test
 	void contextLoads() {

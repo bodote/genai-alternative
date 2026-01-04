@@ -127,6 +127,7 @@ Run:
 Notes:
 - If there are no mutable production classes yet, Pitest may report “No mutations found”; this is expected early in the project.
 - Prefer targeting specific packages/classes once real logic exists.
+- **Current behavior**: Pitest currently executes `*IT.java` tests as well (integration tests are not excluded yet).
 
 ### Coverage Requirements
 

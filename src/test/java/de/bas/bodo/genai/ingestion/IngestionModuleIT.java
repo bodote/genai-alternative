@@ -22,7 +22,7 @@ import org.springframework.modulith.test.ApplicationModuleTest.BootstrapMode;
 @ApplicationModuleTest(module = "ingestion", mode = BootstrapMode.DIRECT_DEPENDENCIES)
 @Import(IngestionTestcontainersConfiguration.class)
 @DisplayName("Ingestion module")
-class IngestionModuleTest {
+class IngestionModuleIT {
 	private static final int WORK_ID = 1661;
 	private static final int MAX_LENGTH = 12;
 	private static final int OVERLAP = 0;
@@ -37,7 +37,7 @@ class IngestionModuleTest {
 	private final RecordingRetrievalStore retrievalStore;
 
 	@Autowired
-	IngestionModuleTest(
+	IngestionModuleIT(
 			IngestionFacade ingestionFacade,
 			RecordingEmbeddingClient embeddingClient,
 			RecordingRetrievalStore retrievalStore
