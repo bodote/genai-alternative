@@ -4,6 +4,14 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 1536
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sherlock
+    username: sherlock
+    password: sherlock
 genai:
   retrieval:
     embedding-dimension: 1536

@@ -1,10 +1,12 @@
 package de.bas.bodo.genai;
 
 import de.bas.bodo.genai.ingestion.embedding.EmbeddingClient;
+import de.bas.bodo.genai.generation.GenerationService;
 import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import de.bas.bodo.genai.retrieval.RetrievalStore;
 import de.bas.bodo.genai.testing.TestcontainersConfiguration;
 import java.util.List;
+import org.mockito.Mockito;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -25,6 +27,11 @@ class GenaiApplicationIT {
 		@Bean
 		EmbeddingClient embeddingClient() {
 			return texts -> List.of();
+		}
+
+		@Bean
+		GenerationService generationService() {
+			return Mockito.mock(GenerationService.class);
 		}
 
 		@Bean

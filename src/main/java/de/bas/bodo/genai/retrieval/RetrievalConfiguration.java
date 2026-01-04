@@ -1,7 +1,6 @@
 package de.bas.bodo.genai.retrieval;
 
 import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,13 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(RetrievalProperties.class)
 public class RetrievalConfiguration {
 	@Bean
-	@ConditionalOnBean(EmbeddingModel.class)
 	QueryEmbeddingClient queryEmbeddingClient(EmbeddingModel embeddingModel) {
 		return query -> toFloatList(embeddingModel.embed(query));
 	}
 
 	@Bean
-	@ConditionalOnBean(QueryEmbeddingClient.class)
 	RetrievalService retrievalService(
 			QueryEmbeddingClient embeddingClient,
 			RetrievalStore retrievalStore,

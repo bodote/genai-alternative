@@ -56,6 +56,7 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
 1) HTTP endpoints
    - Tests for POST `/ask` (or similar) returning structured response.
 2) UI
+   - Server-rendered Thymeleaf page (no Angular/React SPA).
    - Minimal landing page with question input and answer panel.
 3) Error handling
    - Clear user feedback for ingestion not run / no results / guardrail block.
@@ -72,4 +73,3 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
 - Unit tests for each new class with behavior.
 - Integration tests for DB + vector search (Testcontainers).
 - `./gradlew test` and `./gradlew jacocoTestReport` green.
-
