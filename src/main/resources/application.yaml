@@ -4,3 +4,6 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
+genai:
+  retrieval:
+    embedding-dimension: 1536

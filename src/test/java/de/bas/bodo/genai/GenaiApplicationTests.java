@@ -3,15 +3,17 @@ package de.bas.bodo.genai;
 import de.bas.bodo.genai.ingestion.embedding.EmbeddingClient;
 import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import de.bas.bodo.genai.retrieval.RetrievalStore;
+import de.bas.bodo.genai.testing.TestcontainersConfiguration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 @SpringBootTest
-@Import(GenaiApplicationTests.TestConfig.class)
+@Import({GenaiApplicationTests.TestConfig.class, TestcontainersConfiguration.class})
 class GenaiApplicationTests {
 
 	@Test
@@ -26,6 +28,7 @@ class GenaiApplicationTests {
 		}
 
 		@Bean
+		@Primary
 		RetrievalStore retrievalStore() {
 			return new RetrievalStore() {
 				@Override

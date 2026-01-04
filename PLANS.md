@@ -38,7 +38,7 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
 2) Top‑K search
    - Tests: deterministic retrieval ordering and metadata mapping.
 3) Retrieval API
-   - Service that returns `RetrievalResult` (chunks + metadata).
+   - Service that returns `RetrievalResult` (chunks + metadata). 
 
 ## Phase 3: Guardrailed Generation
 1) Prompt assembly

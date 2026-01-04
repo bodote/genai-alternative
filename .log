@@ -1,0 +1,450 @@
+!SESSION 2026-01-04 10:44:27.056 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=de_DE
+Framework arguments:  --pipe=/private/var/folders/jp/ct9_rh594218g9l_j9_fbj480000gn/T/lsp-f871189a2516d929417b09521fb69bcb.sock
+Command-line arguments:  -data /Users/bodo.te/Library/Application Support/Code/User/workspaceStorage/a3e3725bd48f584ccd5cb99914c1c214/redhat.java/jdt_ws --pipe=/private/var/folders/jp/ct9_rh594218g9l_j9_fbj480000gn/T/lsp-f871189a2516d929417b09521fb69bcb.sock
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.398
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.428
+!MESSAGE Started org.eclipse.buildship.core 22ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.428
+!MESSAGE Started org.eclipse.m2e.core 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.528
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.554
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:28.556
+!MESSAGE Initializing Java Language Server 1.54.0.202511251852
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.028
+!MESSAGE ProjectRegistryRefreshJob finished 600ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.149
+!MESSAGE Default VM Install changed from  null to 1767519869146-/Users/bodo.te/.vscode/extensions/redhat.java-1.50.0-darwin-arm64/jre/21.0.9-macosx-aarch64
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.160
+!MESSAGE Setting /opt/homebrew/Cellar/openjdk@21/21.0.9/libexec/openjdk.jdk/Contents/Home as 'JavaSE-21' environment (id:1767519869154)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.162
+!MESSAGE Setting /opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home as 'JavaSE-25' environment (id:net.java.openjdk.jdk)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.164
+!MESSAGE Setting java.home /opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home as default global VM
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.166
+!MESSAGE Default VM Install changed from  1767519869146-/Users/bodo.te/.vscode/extensions/redhat.java-1.50.0-darwin-arm64/jre/21.0.9-macosx-aarch64 to net.java.openjdk.jdk-/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.173
+!MESSAGE JVM Runtimes changed, saving new configuration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.176
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/jbangdev.jbang-vscode-0.12.0/jars/dev.jbang.eclipse.core.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.177
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/jbangdev.jbang-vscode-0.12.0/jars/dev.jbang.eclipse.ls.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.178
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-gradle-3.17.1/server/com.microsoft.gradle.bs.importer-0.5.4.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.179
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-debug-0.58.4/server/com.microsoft.java.debug.plugin-0.53.2.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.180
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-dependency-0.27.0/server/com.microsoft.jdtls.ext.core-0.24.1.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.181
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-api_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.183
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-engine_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.184
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-migrationsupport_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.185
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-params_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.186
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-commons_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.187
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-engine_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.188
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-launcher_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.189
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-runner_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.190
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-api_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.191
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-commons_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.192
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-engine_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.193
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-vintage-engine_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.194
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.apiguardian.api_1.1.2.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.197
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.eclipse.jdt.junit4.runtime_1.3.100.v20231214-1952.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.198
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.eclipse.jdt.junit5.runtime_1.1.300.v20231214-1952.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.199
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.opentest4j_1.3.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.200
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.jacoco.core_0.8.14.202510111229.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.201
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/com.microsoft.java.test.plugin-0.43.1.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.202
+!MESSAGE Installed reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-maven-0.45.1/jdtls.ext/com.microsoft.java.maven.plugin/target/com.microsoft.java.maven.plugin-0.39.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.208
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-params_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.208
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.opentest4j_1.3.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.224
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/com.microsoft.java.test.plugin-0.43.1.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.227
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-engine_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.239
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-debug-0.58.4/server/com.microsoft.java.debug.plugin-0.53.2.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.239
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-launcher_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.244
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/jbangdev.jbang-vscode-0.12.0/jars/dev.jbang.eclipse.core.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.245
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-commons_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.245
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-migrationsupport_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.245
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.jacoco.core_0.8.14.202510111229.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.246
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-engine_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.246
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-jupiter-api_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.246
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.eclipse.jdt.junit4.runtime_1.3.100.v20231214-1952.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.247
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-commons_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.257
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-maven-0.45.1/jdtls.ext/com.microsoft.java.maven.plugin/target/com.microsoft.java.maven.plugin-0.39.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.265
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-gradle-3.17.1/server/com.microsoft.gradle.bs.importer-0.5.4.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.275
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/jbangdev.jbang-vscode-0.12.0/jars/dev.jbang.eclipse.ls.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.275
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-api_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.276
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-vintage-engine_5.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.276
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-runner_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.277
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.apiguardian.api_1.1.2.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.277
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/org.eclipse.jdt.junit5.runtime_1.1.300.v20231214-1952.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.277
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-test-0.43.2/server/junit-platform-suite-engine_1.11.0.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.285
+!MESSAGE Started reference:file:/Users/bodo.te/.vscode/extensions/vscjava.vscode-java-dependency-0.27.0/server/com.microsoft.jdtls.ext.core-0.24.1.jar
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.288
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.288
+!MESSAGE Non-Static Commands: [java.project.import, java.project.changeImportedProjects, java.navigate.openTypeHierarchy, java.project.resolveStackTraceLocation, java.edit.handlePasteEvent, java.edit.stringFormatting, java.project.getSettings, java.project.resolveWorkspaceSymbol, java.project.upgradeGradle, java.project.createModuleInfo, java.vm.getAllInstalls, java.edit.organizeImports, java.project.refreshDiagnostics, java.project.removeFromSourcePath, java.project.listSourcePaths, java.project.updateSettings, java.project.getAll, java.reloadBundles, java.project.isTestFile, java.project.resolveText, java.project.getClasspaths, java.navigate.resolveTypeHierarchy, java.getTroubleshootingInfo, java.edit.smartSemicolonDetection, java.project.updateSourceAttachment, java.project.updateClassPaths, java.decompile, java.protobuf.generateSources, java.project.resolveSourceAttachment, java.project.updateJdk, java.project.addToSourcePath, java.completion.onDidSelect]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.288
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Non-Static Commands: [vscode.java.test.jacoco.getCoverageDetail, vscode.java.test.findJavaProjects, vscode.java.test.findTestPackagesAndTypes, vscode.java.test.findTestTypesAndMethods, vscode.java.test.resolvePath, vscode.java.test.findTestLocation, vscode.java.test.get.testpath, vscode.java.test.findDirectTestChildrenForClass, vscode.java.test.navigateToTestOrTarget, vscode.java.test.junit.argument, vscode.java.test.generateTests]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Non-Static Commands: [vscode.java.checkProjectSettings, vscode.java.isOnClasspath, vscode.java.fetchUsageData, vscode.java.validateLaunchConfig, vscode.java.resolveInlineVariables, vscode.java.resolveClassFilters, vscode.java.resolveMainMethod, vscode.java.resolveClasspath, vscode.java.resolveBuildFiles, vscode.java.resolveMainClass, vscode.java.updateDebugSettings, vscode.java.resolveSourceUri, vscode.java.fetchPlatformSettings, vscode.java.buildWorkspace, vscode.java.startDebugSession, vscode.java.inferLaunchCommandLength, vscode.java.resolveElementAtSelection, vscode.java.resolveJavaExecutable]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Non-Static Commands: [java.maven.initializeSearcher, java.maven.searchArtifact, java.maven.addDependency, java.maven.controlContext]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Non-Static Commands: [java.gradle.delegateTest]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.289
+!MESSAGE Non-Static Commands: [jbang/synchronize]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.290
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.290
+!MESSAGE Non-Static Commands: [java.project.refreshLib, java.project.checkImportStatus, java.project.list, java.project.generateJar, java.project.getMainClasses, java.project.getImportClassContent, java.getPackageData, java.project.getDependencies, java.resolvePath]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.296
+!MESSAGE RepositoryRegistryUpdateJob finished 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:29.301
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-01-04 10:44:34.995
+!MESSAGE Initialization failed 
+!STACK 0
+java.util.concurrent.CompletionException: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: java.lang.IllegalStateException: org.gradle.tooling.BuildActionFailureException: The supplied build action failed with an exception.
+	at java.base/java.util.concurrent.CompletableFuture.reportJoin(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture.join(Unknown Source)
+	at com.microsoft.gradle.bs.importer.Utils.getBuildTargetsMappedByProjectPath(Utils.java:55)
+	at com.microsoft.gradle.bs.importer.GradleBuildServerProjectImporter.importProjects(GradleBuildServerProjectImporter.java:324)
+	at com.microsoft.gradle.bs.importer.GradleBuildServerProjectImporter.importToWorkspace(GradleBuildServerProjectImporter.java:228)
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.importProjects(ProjectsManager.java:164)
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.initializeProjects(ProjectsManager.java:126)
+	at org.eclipse.jdt.ls.core.internal.handlers.InitHandler$1.runInWorkspace(InitHandler.java:263)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:43)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: java.lang.IllegalStateException: org.gradle.tooling.BuildActionFailureException: The supplied build action failed with an exception.
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:204)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:35.005
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:35.035
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:35.036
+!MESSAGE >> registerWatchers'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:35.037
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:42.314
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:42.366
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:43.091
+!MESSAGE >> java/validateDocument
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:43.392
+!MESSAGE Reconciled 1. Took 1 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:43.395
+!MESSAGE User canceled while collecting the document symbols.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:44.023
+!MESSAGE begin problem for /GenaiApplicationTests.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:44.024
+!MESSAGE 1 problems reported for /GenaiApplicationTests.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:44.026
+!MESSAGE Validated 1. Took 32 ms
+
+!ENTRY java-debug 1 0 2026-01-04 10:44:46.061
+!MESSAGE Starting com.microsoft.java.debug.plugin
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:44:47.148
+!MESSAGE Clearing problems for /GenaiApplicationTests.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:26.308
+!MESSAGE Reconciled 1. Took 1 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:26.345
+!MESSAGE >> java/validateDocument
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:26.781
+!MESSAGE begin problem for /RetrievalConfigurationTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:26.781
+!MESSAGE 1 problems reported for /RetrievalConfigurationTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:26.782
+!MESSAGE Validated 1. Took 35 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:45:34.994
+!MESSAGE Clearing problems for /RetrievalConfigurationTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:35.593
+!MESSAGE >> shutdown
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:35.608
+!MESSAGE >> exit
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:35.668
+!MESSAGE Shutdown received... waking up main thread
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:35.676
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is stopping:
+!SESSION 2026-01-04 10:49:42.324 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=de_DE
+Framework arguments:  --pipe=/private/var/folders/jp/ct9_rh594218g9l_j9_fbj480000gn/T/lsp-f9d6574f108bf6a9f0236379d446c3c4.sock
+Command-line arguments:  -data /Users/bodo.te/Library/Application Support/Code/User/workspaceStorage/a3e3725bd48f584ccd5cb99914c1c214/redhat.java/jdt_ws --pipe=/private/var/folders/jp/ct9_rh594218g9l_j9_fbj480000gn/T/lsp-f9d6574f108bf6a9f0236379d446c3c4.sock
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.680
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.717
+!MESSAGE Started org.eclipse.buildship.core 26ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.717
+!MESSAGE Started org.eclipse.m2e.core 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.779
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.796
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:43.798
+!MESSAGE Initializing Java Language Server 1.54.0.202511251852
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.176
+!MESSAGE ProjectRegistryRefreshJob finished 458ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.244
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.245
+!MESSAGE Non-Static Commands: [java.project.import, java.project.changeImportedProjects, java.navigate.openTypeHierarchy, java.project.resolveStackTraceLocation, java.edit.handlePasteEvent, java.edit.stringFormatting, java.project.getSettings, java.project.resolveWorkspaceSymbol, java.project.upgradeGradle, java.project.createModuleInfo, java.vm.getAllInstalls, java.edit.organizeImports, java.project.refreshDiagnostics, java.project.removeFromSourcePath, java.project.listSourcePaths, java.project.updateSettings, java.project.getAll, java.reloadBundles, java.project.isTestFile, java.project.resolveText, java.project.getClasspaths, java.navigate.resolveTypeHierarchy, java.getTroubleshootingInfo, java.edit.smartSemicolonDetection, java.project.updateSourceAttachment, java.project.updateClassPaths, java.decompile, java.protobuf.generateSources, java.project.resolveSourceAttachment, java.project.updateJdk, java.project.addToSourcePath, java.completion.onDidSelect]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.245
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.245
+!MESSAGE Non-Static Commands: [vscode.java.test.jacoco.getCoverageDetail, vscode.java.test.findJavaProjects, vscode.java.test.findTestPackagesAndTypes, vscode.java.test.findTestTypesAndMethods, vscode.java.test.resolvePath, vscode.java.test.findTestLocation, vscode.java.test.get.testpath, vscode.java.test.findDirectTestChildrenForClass, vscode.java.test.navigateToTestOrTarget, vscode.java.test.junit.argument, vscode.java.test.generateTests]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.245
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.245
+!MESSAGE Non-Static Commands: [vscode.java.checkProjectSettings, vscode.java.isOnClasspath, vscode.java.fetchUsageData, vscode.java.validateLaunchConfig, vscode.java.resolveInlineVariables, vscode.java.resolveClassFilters, vscode.java.resolveMainMethod, vscode.java.resolveClasspath, vscode.java.resolveBuildFiles, vscode.java.resolveMainClass, vscode.java.updateDebugSettings, vscode.java.resolveSourceUri, vscode.java.fetchPlatformSettings, vscode.java.buildWorkspace, vscode.java.startDebugSession, vscode.java.inferLaunchCommandLength, vscode.java.resolveElementAtSelection, vscode.java.resolveJavaExecutable]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.246
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.246
+!MESSAGE Non-Static Commands: [java.maven.initializeSearcher, java.maven.searchArtifact, java.maven.addDependency, java.maven.controlContext]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.246
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.246
+!MESSAGE Non-Static Commands: [java.gradle.delegateTest]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.246
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.247
+!MESSAGE Non-Static Commands: [jbang/synchronize]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.247
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.247
+!MESSAGE Non-Static Commands: [java.project.refreshLib, java.project.checkImportStatus, java.project.list, java.project.generateJar, java.project.getMainClasses, java.project.getImportClassContent, java.getPackageData, java.project.getDependencies, java.resolvePath]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.259
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:44.270
+!MESSAGE RepositoryRegistryUpdateJob finished 12ms
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-01-04 10:49:49.955
+!MESSAGE Initialization failed 
+!STACK 0
+java.util.concurrent.CompletionException: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: java.lang.IllegalStateException: org.gradle.tooling.BuildActionFailureException: The supplied build action failed with an exception.
+	at java.base/java.util.concurrent.CompletableFuture.reportJoin(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture.join(Unknown Source)
+	at com.microsoft.gradle.bs.importer.Utils.getBuildTargetsMappedByProjectPath(Utils.java:55)
+	at com.microsoft.gradle.bs.importer.GradleBuildServerProjectImporter.importProjects(GradleBuildServerProjectImporter.java:324)
+	at com.microsoft.gradle.bs.importer.GradleBuildServerProjectImporter.importToWorkspace(GradleBuildServerProjectImporter.java:228)
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.importProjects(ProjectsManager.java:164)
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.initializeProjects(ProjectsManager.java:126)
+	at org.eclipse.jdt.ls.core.internal.handlers.InitHandler$1.runInWorkspace(InitHandler.java:263)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:43)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: java.lang.IllegalStateException: org.gradle.tooling.BuildActionFailureException: The supplied build action failed with an exception.
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:204)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:49.968
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:50.000
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:50.001
+!MESSAGE >> registerWatchers'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-01-04 10:49:50.002
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'

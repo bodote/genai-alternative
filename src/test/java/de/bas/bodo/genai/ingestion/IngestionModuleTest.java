@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 import de.bas.bodo.genai.retrieval.EmbeddedChunk;
-import de.bas.bodo.genai.testing.RecordingEmbeddingClient;
-import de.bas.bodo.genai.testing.RecordingRetrievalStore;
+import de.bas.bodo.genai.ingestion.testing.RecordingEmbeddingClient;
+import de.bas.bodo.genai.ingestion.testing.RecordingRetrievalStore;
+import de.bas.bodo.genai.ingestion.testing.IngestionTestcontainersConfiguration;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,10 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import org.springframework.modulith.test.ApplicationModuleTest;
 import org.springframework.modulith.test.ApplicationModuleTest.BootstrapMode;
 
 @ApplicationModuleTest(module = "ingestion", mode = BootstrapMode.DIRECT_DEPENDENCIES)
+@Import(IngestionTestcontainersConfiguration.class)
 @DisplayName("Ingestion module")
 class IngestionModuleTest {
 	private static final int WORK_ID = 1661;
@@ -26,14 +30,22 @@ class IngestionModuleTest {
 	private static final String END_MARKER = "*** END OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES ***";
 	private static final List<String> EXPECTED_CHUNKS = List.of("Line one.", "Line two.");
 
-	@Autowired
-	private IngestionFacade ingestionFacade;
+	private final IngestionFacade ingestionFacade;
+
+	private final RecordingEmbeddingClient embeddingClient;
+
+	private final RecordingRetrievalStore retrievalStore;
 
 	@Autowired
-	private RecordingEmbeddingClient embeddingClient;
-
-	@Autowired
-	private RecordingRetrievalStore retrievalStore;
+	IngestionModuleTest(
+			IngestionFacade ingestionFacade,
+			RecordingEmbeddingClient embeddingClient,
+			RecordingRetrievalStore retrievalStore
+	) {
+		this.ingestionFacade = ingestionFacade;
+		this.embeddingClient = embeddingClient;
+		this.retrievalStore = retrievalStore;
+	}
 
 	@BeforeEach
 	void resetFakes() {
@@ -76,6 +88,7 @@ class IngestionModuleTest {
 		}
 
 		@Bean
+		@Primary
 		RecordingRetrievalStore retrievalStore() {
 			return new RecordingRetrievalStore();
 		}

@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.testing;
+package de.bas.bodo.genai.ingestion.testing;
 
 import de.bas.bodo.genai.ingestion.embedding.EmbeddingClient;
 import java.util.ArrayList;

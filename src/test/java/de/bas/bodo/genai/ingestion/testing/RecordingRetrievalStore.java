@@ -1,7 +1,8 @@
-package de.bas.bodo.genai.testing;
+package de.bas.bodo.genai.ingestion.testing;
 
 import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import de.bas.bodo.genai.retrieval.RetrievalStore;
+import de.bas.bodo.genai.retrieval.StoredChunk;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,11 @@ public final class RecordingRetrievalStore implements RetrievalStore {
 	@Override
 	public void addDocuments(List<EmbeddedChunk> chunks) {
 		savedChunks.addAll(chunks);
+	}
+
+	@Override
+	public List<StoredChunk> search(String query, int topK) {
+		throw new UnsupportedOperationException("Search not supported in recording store");
 	}
 
 	public List<EmbeddedChunk> savedChunks() {
