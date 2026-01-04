@@ -2,7 +2,7 @@ package de.bas.bodo.genai.retrieval;
 
 import java.util.List;
 
-public final class RetrievalService {
+public final class RetrievalService implements RetrievalGateway {
 	private final QueryEmbeddingClient embeddingClient;
 	private final RetrievalStore retrievalStore;
 	private final int embeddingDimension;
@@ -13,6 +13,7 @@ public final class RetrievalService {
 		this.embeddingDimension = embeddingDimension;
 	}
 
+	@Override
 	public RetrievalResult retrieve(String query, int topK) {
 		List<Float> embedding = embeddingClient.embed(query);
 		if (embedding.size() != embeddingDimension) {
