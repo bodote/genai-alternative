@@ -8,6 +8,7 @@ public class GutenbergIngestionProperties {
 	private int chunkOverlap = 100;
 	private int maxDownloadCount = 2;
 	private int authorId = 69;
+	private String authorName = "Conan Doyle";
 
 	public int getChunkSize() {
 		return chunkSize;
@@ -39,5 +40,13 @@ public class GutenbergIngestionProperties {
 
 	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
 	}
 }

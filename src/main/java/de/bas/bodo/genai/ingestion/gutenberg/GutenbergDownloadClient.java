@@ -1,43 +1,52 @@
 package de.bas.bodo.genai.ingestion.gutenberg;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 
 final class GutenbergDownloadClient implements GutenbergDownloader {
-	private static final String WORK_PAGE_PREFIX = "https://www.gutenberg.org/ebooks/";
-	private static final String GUTENBERG_HOST = "https://www.gutenberg.org";
-	private static final Pattern TEXT_LINK_PATTERN = Pattern.compile("href=\\\"([^\\\"]+\\.txt(?:\\.utf-8)?)\\\"");
+	private static final String BOOK_DETAILS_PREFIX = "https://gutendex.com/books/";
 
 	private final GutenbergHttpClient httpClient;
 	private final GutenbergTextStore textStore;
+	private final ObjectMapper objectMapper;
 
-	GutenbergDownloadClient(GutenbergHttpClient httpClient, GutenbergTextStore textStore) {
+	GutenbergDownloadClient(GutenbergHttpClient httpClient, GutenbergTextStore textStore, ObjectMapper objectMapper) {
 		this.httpClient = httpClient;
 		this.textStore = textStore;
+		this.objectMapper = objectMapper;
 	}
 
 	@Override
 	public void downloadWork(int workId) {
-		String workPageUrl = WORK_PAGE_PREFIX + workId;
-		String html = httpClient.get(workPageUrl);
-		String textUrl = resolveTextUrl(html);
-		String fullTextUrl = toAbsoluteUrl(textUrl);
-		String textBody = httpClient.get(fullTextUrl);
-		textStore.save(workId, textBody, fullTextUrl);
+		String detailsUrl = BOOK_DETAILS_PREFIX + workId + "/";
+		String json = httpClient.get(detailsUrl);
+		GutendexBookDetails details = parseDetails(json);
+		String textUrl = resolveTextUrl(details.formats(), detailsUrl);
+		String textBody = httpClient.get(textUrl);
+		textStore.save(workId, textBody, textUrl);
 	}
 
-	private static String resolveTextUrl(String html) {
-		Matcher matcher = TEXT_LINK_PATTERN.matcher(html);
-		if (!matcher.find()) {
-			throw new IllegalStateException("No text link found");
+	private GutendexBookDetails parseDetails(String json) {
+		try {
+			return objectMapper.readValue(json, GutendexBookDetails.class);
+		} catch (Exception ex) {
+			throw new IllegalStateException("Failed to parse Gutendex response", ex);
 		}
-		return matcher.group(1);
 	}
 
-	private static String toAbsoluteUrl(String href) {
-		if (href.startsWith("http")) {
-			return href;
+	private static String resolveTextUrl(Map<String, String> formats, String detailsUrl) {
+		if (formats == null || formats.isEmpty()) {
+			throw new IllegalStateException("Gutendex response has no formats for " + detailsUrl);
 		}
-		return GUTENBERG_HOST + (href.startsWith("/") ? href : "/" + href);
+		return formats.entrySet().stream()
+				.filter(entry -> entry.getKey().startsWith("text/plain"))
+				.map(Map.Entry::getValue)
+				.findFirst()
+				.orElseThrow(() -> new IllegalStateException("No text/plain format found for " + detailsUrl));
+	}
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	private record GutendexBookDetails(Map<String, String> formats) {
 	}
 }

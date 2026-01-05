@@ -27,8 +27,8 @@ public class GenerationConfiguration {
 	}
 
 	@Bean
-	FactCheckGuardrail factCheckGuardrail() {
-		return new FactCheckGuardrail();
+	FactCheckGuardrail factCheckGuardrail(GenerationClient generationClient) {
+		return new FactCheckGuardrail(generationClient);
 	}
 
 	@Bean

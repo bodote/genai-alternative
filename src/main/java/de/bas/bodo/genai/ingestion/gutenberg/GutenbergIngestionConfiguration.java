@@ -1,5 +1,6 @@
 package de.bas.bodo.genai.ingestion.gutenberg;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.bas.bodo.genai.ingestion.internal.IngestionHandler;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,10 @@ import org.springframework.web.client.RestClient;
 public class GutenbergIngestionConfiguration {
 	@Bean
 	RestClient restClient(RestClient.Builder builder) {
-		return builder.build();
+		return builder
+				.defaultHeader("User-Agent", "genai-codex/1.0")
+				.defaultHeader("Accept", "application/json, text/plain, */*")
+				.build();
 	}
 
 	@Bean
@@ -20,8 +24,8 @@ public class GutenbergIngestionConfiguration {
 	}
 
 	@Bean
-	GutenbergCatalog gutenbergCatalog(GutenbergHttpClient httpClient) {
-		return new GutenbergCatalogClient(httpClient);
+	GutenbergCatalog gutenbergCatalog(GutenbergHttpClient httpClient, ObjectMapper objectMapper) {
+		return new GutenbergCatalogClient(httpClient, objectMapper);
 	}
 
 	@Bean
@@ -30,7 +34,11 @@ public class GutenbergIngestionConfiguration {
 	}
 
 	@Bean
-	GutenbergDownloader gutenbergDownloader(GutenbergHttpClient httpClient, GutenbergTextStore textStore) {
-		return new GutenbergDownloadClient(httpClient, textStore);
+	GutenbergDownloader gutenbergDownloader(
+			GutenbergHttpClient httpClient,
+			GutenbergTextStore textStore,
+			ObjectMapper objectMapper
+	) {
+		return new GutenbergDownloadClient(httpClient, textStore, objectMapper);
 	}
 }

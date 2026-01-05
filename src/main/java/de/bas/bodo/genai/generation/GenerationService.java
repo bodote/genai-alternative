@@ -11,6 +11,8 @@ import de.bas.bodo.genai.generation.internal.PromptAssembler;
 import java.util.List;
 
 public class GenerationService {
+	private static final org.slf4j.Logger logger =
+			org.slf4j.LoggerFactory.getLogger(GenerationService.class);
 	private final RetrievalGateway retrievalGateway;
 	private final PromptAssembler promptAssembler;
 	private final InputGuardrail inputGuardrail;
@@ -47,8 +49,15 @@ public class GenerationService {
 			return GenerationResult.inputBlocked(inputResult.reason());
 		}
 		RetrievalResult retrievalResult = retrievalGateway.retrieve(question, topK);
+		logger.debug(
+				"Retrieved {} chunks for question (topK={}).",
+				retrievalResult.chunks().size(),
+				topK
+		);
 		String prompt = promptAssembler.assemble(question, retrievalResult, history);
+		logger.info("Prompt sent to LLM:\n{}", prompt);
 		String response = generationClient.generate(prompt);
+		logger.info("LLM response:\n{}", response);
 		GuardrailResult outputResult = outputGuardrail.validate(response);
 		if (!outputResult.allowed()) {
 			return GenerationResult.outputBlocked(outputResult.reason());

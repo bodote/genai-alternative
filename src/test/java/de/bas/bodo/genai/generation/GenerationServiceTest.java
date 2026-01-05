@@ -30,6 +30,8 @@ class GenerationServiceTest {
 	private static final String UNGROUNDED_ANSWER = GenerationTestFixtures.UNGROUNDED_ANSWER;
 	private static final String INPUT_BLOCK_REASON = "Input violates safety policy.";
 	private static final String FACT_BLOCK_REASON = "Answer is not grounded in provided context.";
+	private static final String GROUNDED_RESPONSE = "GROUNDED";
+	private static final String UNGROUNDED_RESPONSE = "UNGROUNDED";
 	private static final String HISTORY_QUESTION = "Where does Holmes live?";
 	private static final String HISTORY_ANSWER = "Holmes lives at 221B Baker Street.";
 
@@ -43,12 +45,13 @@ class GenerationServiceTest {
 			));
 			RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(retrievalResult);
 			RecordingGenerationClient generationClient = new RecordingGenerationClient(GROUNDED_ANSWER);
+			RecordingGenerationClient guardrailClient = new RecordingGenerationClient(GROUNDED_RESPONSE);
 			GenerationService service = new GenerationService(
 					retrievalGateway,
 					new PromptAssembler(),
 					new InputGuardrail(),
 					new OutputGuardrail(),
-					new FactCheckGuardrail(),
+					new FactCheckGuardrail(guardrailClient),
 					generationClient,
 					TOP_K
 			);
@@ -70,12 +73,13 @@ class GenerationServiceTest {
 			));
 			RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(retrievalResult);
 			RecordingGenerationClient generationClient = new RecordingGenerationClient(GROUNDED_ANSWER);
+			RecordingGenerationClient guardrailClient = new RecordingGenerationClient(GROUNDED_RESPONSE);
 			GenerationService service = new GenerationService(
 					retrievalGateway,
 					new PromptAssembler(),
 					new InputGuardrail(),
 					new OutputGuardrail(),
-					new FactCheckGuardrail(),
+					new FactCheckGuardrail(guardrailClient),
 					generationClient,
 					TOP_K
 			);
@@ -96,12 +100,13 @@ class GenerationServiceTest {
 			));
 			RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(retrievalResult);
 			RecordingGenerationClient generationClient = new RecordingGenerationClient(GROUNDED_ANSWER);
+			RecordingGenerationClient guardrailClient = new RecordingGenerationClient(GROUNDED_RESPONSE);
 			GenerationService service = new GenerationService(
 					retrievalGateway,
 					new PromptAssembler(),
 					new InputGuardrail(),
 					new OutputGuardrail(),
-					new FactCheckGuardrail(),
+					new FactCheckGuardrail(guardrailClient),
 					generationClient,
 					TOP_K
 			);
@@ -122,12 +127,13 @@ class GenerationServiceTest {
 			));
 			RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(retrievalResult);
 			RecordingGenerationClient generationClient = new RecordingGenerationClient(UNGROUNDED_ANSWER);
+			RecordingGenerationClient guardrailClient = new RecordingGenerationClient(UNGROUNDED_RESPONSE);
 			GenerationService service = new GenerationService(
 					retrievalGateway,
 					new PromptAssembler(),
 					new InputGuardrail(),
 					new OutputGuardrail(),
-					new FactCheckGuardrail(),
+					new FactCheckGuardrail(guardrailClient),
 					generationClient,
 					TOP_K
 			);

@@ -141,9 +141,14 @@ server:
 genai:
   ingestion:
     author-id: 69
+    author-name: "Conan Doyle"
     chunk-size: 1000
     chunk-overlap: 100
     max-download-count: 2
+    startup:
+      enabled: true
+    embedding:
+      batch-size: 500
   generation:
     history-max-turns: 20
   retrieval:

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("EmbeddingIngestionService")
 class EmbeddingIngestionServiceTest {
 	private static final int WORK_ID = 1661;
+	private static final int BATCH_SIZE = 2;
 	private static final List<String> CHUNKS = List.of("chunk one", "chunk two");
 	private static final List<Float> FIRST_EMBEDDING = List.of(0.1f, 0.2f);
 	private static final List<Float> SECOND_EMBEDDING = List.of(0.3f, 0.4f);
@@ -23,7 +24,9 @@ class EmbeddingIngestionServiceTest {
 		float[] secondEmbedding = new float[] {0.3f, 0.4f};
 		RecordingEmbeddingClient embeddingClient = RecordingEmbeddingClient.fixed(List.of(firstEmbedding, secondEmbedding));
 		RecordingRetrievalStore retrievalStore = new RecordingRetrievalStore();
-		EmbeddingIngestionService service = new EmbeddingIngestionService(embeddingClient, retrievalStore);
+		EmbeddingIngestionProperties properties = new EmbeddingIngestionProperties();
+		properties.setBatchSize(BATCH_SIZE);
+		EmbeddingIngestionService service = new EmbeddingIngestionService(embeddingClient, retrievalStore, properties);
 
 		service.ingest(WORK_ID, CHUNKS);
 
@@ -36,6 +39,43 @@ class EmbeddingIngestionServiceTest {
 				);
 		assertThat(retrievalStore.savedChunks().get(0).embedding()).isEqualTo(FIRST_EMBEDDING);
 		assertThat(retrievalStore.savedChunks().get(1).embedding()).isEqualTo(SECOND_EMBEDDING);
+	}
+
+	@Test
+	void batchesEmbeddingsRequests() {
+		List<String> chunks = List.of("a", "b", "c", "d", "e");
+		RecordingBatchEmbeddingClient embeddingClient = new RecordingBatchEmbeddingClient();
+		RecordingRetrievalStore retrievalStore = new RecordingRetrievalStore();
+		EmbeddingIngestionProperties properties = new EmbeddingIngestionProperties();
+		properties.setBatchSize(BATCH_SIZE);
+		EmbeddingIngestionService service = new EmbeddingIngestionService(embeddingClient, retrievalStore, properties);
+
+		service.ingest(WORK_ID, chunks);
+
+		assertThat(embeddingClient.batchSizes()).containsExactly(2, 2, 1);
+		assertThat(retrievalStore.savedChunks()).hasSize(chunks.size());
+		assertThat(retrievalStore.savedChunks().get(4).text()).isEqualTo("e");
+		assertThat(retrievalStore.savedChunks().get(4).embedding()).containsExactly(4.0f, 5.0f);
+	}
+
+	private static final class RecordingBatchEmbeddingClient implements EmbeddingClient {
+		private final List<Integer> batchSizes = new java.util.ArrayList<>();
+		private int nextIndex;
+
+		@Override
+		public List<float[]> embedAll(List<String> texts) {
+			batchSizes.add(texts.size());
+			List<float[]> embeddings = new java.util.ArrayList<>();
+			for (int i = 0; i < texts.size(); i++) {
+				int index = nextIndex++;
+				embeddings.add(new float[] {index, index + 1.0f});
+			}
+			return List.copyOf(embeddings);
+		}
+
+		private List<Integer> batchSizes() {
+			return List.copyOf(batchSizes);
+		}
 	}
 
 }

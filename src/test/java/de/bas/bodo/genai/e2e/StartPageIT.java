@@ -38,7 +38,8 @@ import org.mockito.Mockito;
 				"spring.ai.vectorstore.pgvector.initialize-schema=true",
 				"spring.ai.vectorstore.pgvector.dimensions=1536",
 				"genai.retrieval.embedding-dimension=1536",
-				"genai.generation.top-k=1"
+				"genai.generation.top-k=1",
+				"genai.ingestion.startup.enabled=false"
 		}
 )
 @Import({StartPageIT.TestConfig.class, IngestionTestcontainersConfiguration.class})

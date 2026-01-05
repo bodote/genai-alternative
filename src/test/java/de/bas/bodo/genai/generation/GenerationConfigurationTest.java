@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 class GenerationConfigurationTest {
 	private static final String QUESTION = "Who is Holmes?";
 	private static final String ANSWER = "Holmes is a detective.";
+	private static final String GROUNDED_RESPONSE = "GROUNDED";
+	private static final String FACT_CHECK_MARKER = "FACT_CHECK";
 	private static final int TOP_K = 4;
 	private static final RetrievedChunk CONTEXT_CHUNK = new RetrievedChunk(1, 0, ANSWER, 0.9);
 	private static final RetrievalResult RETRIEVAL_RESULT = new RetrievalResult(List.of(CONTEXT_CHUNK));
@@ -29,7 +31,13 @@ class GenerationConfigurationTest {
 	@Test
 	void createsGenerationServiceWithConfiguredTopK() {
 		ChatModel chatModel = Mockito.mock(ChatModel.class);
-		Mockito.when(chatModel.call(Mockito.anyString())).thenReturn(ANSWER);
+		Mockito.when(chatModel.call(Mockito.anyString())).thenAnswer(invocation -> {
+			String prompt = invocation.getArgument(0);
+			if (prompt.contains(FACT_CHECK_MARKER)) {
+				return GROUNDED_RESPONSE;
+			}
+			return ANSWER;
+		});
 		RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(RETRIEVAL_RESULT);
 
 		contextRunner
@@ -50,7 +58,13 @@ class GenerationConfigurationTest {
 	@Test
 	void exposesHistorySettingsFromConfiguration() {
 		ChatModel chatModel = Mockito.mock(ChatModel.class);
-		Mockito.when(chatModel.call(Mockito.anyString())).thenReturn(ANSWER);
+		Mockito.when(chatModel.call(Mockito.anyString())).thenAnswer(invocation -> {
+			String prompt = invocation.getArgument(0);
+			if (prompt.contains(FACT_CHECK_MARKER)) {
+				return GROUNDED_RESPONSE;
+			}
+			return ANSWER;
+		});
 		RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(RETRIEVAL_RESULT);
 
 		contextRunner

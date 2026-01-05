@@ -20,7 +20,8 @@ class IngestionStartupTriggerTest {
 		void ingestsWhenCatalogIsEmpty() {
 			RecordingIngestionJob ingestionJob = new RecordingIngestionJob();
 			StubRetrievalCatalog retrievalCatalog = new StubRetrievalCatalog(List.of());
-			IngestionStartupTrigger trigger = new IngestionStartupTrigger(retrievalCatalog, ingestionJob);
+			IngestionStartupProperties properties = new IngestionStartupProperties();
+			IngestionStartupTrigger trigger = new IngestionStartupTrigger(retrievalCatalog, ingestionJob, properties);
 
 			ApplicationArguments args = Mockito.mock(ApplicationArguments.class);
 
@@ -33,7 +34,23 @@ class IngestionStartupTriggerTest {
 		void skipsWhenCatalogHasEntries() {
 			RecordingIngestionJob ingestionJob = new RecordingIngestionJob();
 			StubRetrievalCatalog retrievalCatalog = new StubRetrievalCatalog(List.of(1661));
-			IngestionStartupTrigger trigger = new IngestionStartupTrigger(retrievalCatalog, ingestionJob);
+			IngestionStartupProperties properties = new IngestionStartupProperties();
+			IngestionStartupTrigger trigger = new IngestionStartupTrigger(retrievalCatalog, ingestionJob, properties);
+
+			ApplicationArguments args = Mockito.mock(ApplicationArguments.class);
+
+			trigger.run(args);
+
+			assertThat(ingestionJob.invocations()).isZero();
+		}
+
+		@Test
+		void skipsWhenStartupIsDisabled() {
+			RecordingIngestionJob ingestionJob = new RecordingIngestionJob();
+			StubRetrievalCatalog retrievalCatalog = new StubRetrievalCatalog(List.of());
+			IngestionStartupProperties properties = new IngestionStartupProperties();
+			properties.setEnabled(false);
+			IngestionStartupTrigger trigger = new IngestionStartupTrigger(retrievalCatalog, ingestionJob, properties);
 
 			ApplicationArguments args = Mockito.mock(ApplicationArguments.class);
 

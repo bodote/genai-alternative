@@ -15,6 +15,7 @@ import de.bas.bodo.genai.generation.GenerationHistorySettings;
 import de.bas.bodo.genai.generation.GenerationResult;
 import de.bas.bodo.genai.generation.GenerationService;
 import de.bas.bodo.genai.generation.testing.GenerationTestFixtures;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ class AskControllerTest {
 	private static final String BLOCK_REASON = "Input violates safety policy.";
 	private static final String VIEW_NAME = "index";
 	private static final int HISTORY_MAX_TURNS = 20;
+	private static final String FIRST_QUESTION = "Who is Sherlock Holmes?";
+	private static final String FIRST_ANSWER = "Sherlock Holmes is a detective.";
+	private static final String FOLLOW_UP_QUESTION = GenerationTestFixtures.QUESTION;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -88,6 +92,30 @@ class AskControllerTest {
 				.andExpect(model().attribute("question", QUESTION));
 
 		assertThat(conversationHistory.history(session)).isEmpty();
+	}
+
+	@Test
+	void keepsPreviousSuccessfulAnswersInHistoryAfterBlockedAttempt() throws Exception {
+		when(generationService.answer(eq(FIRST_QUESTION), anyList())).thenReturn(GenerationResult.ok(FIRST_ANSWER));
+		when(generationService.answer(eq(FOLLOW_UP_QUESTION), anyList()))
+				.thenReturn(GenerationResult.inputBlocked(BLOCK_REASON));
+		MockHttpSession session = new MockHttpSession();
+
+		mockMvc.perform(post("/ask")
+					.session(session)
+					.param("question", FIRST_QUESTION))
+				.andExpect(status().isOk());
+
+		mockMvc.perform(post("/ask")
+					.session(session)
+					.param("question", FOLLOW_UP_QUESTION))
+				.andExpect(status().isOk())
+				.andExpect(view().name(VIEW_NAME))
+				.andExpect(model().attribute("status", "INPUT_BLOCKED"))
+				.andExpect(model().attribute("answer", ""))
+				.andExpect(model().attribute("reason", BLOCK_REASON))
+				.andExpect(model().attribute("question", FOLLOW_UP_QUESTION))
+				.andExpect(model().attribute("history", List.of(new ConversationTurn(FIRST_QUESTION, FIRST_ANSWER))));
 	}
 
 	@TestConfiguration

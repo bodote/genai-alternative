@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-@SpringBootTest
+@SpringBootTest(properties = "genai.ingestion.startup.enabled=false")
 @Import({GenaiApplicationIT.TestConfig.class, TestcontainersConfiguration.class})
 class GenaiApplicationIT {
 

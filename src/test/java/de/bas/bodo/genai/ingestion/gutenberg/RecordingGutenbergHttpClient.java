@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-final class RecordingGutenbergHttpClient implements GutenbergHttpClient {
+class RecordingGutenbergHttpClient implements GutenbergHttpClient {
 	private final Map<String, String> responses;
 	private final String defaultResponse;
 	private final boolean requireMatch;
@@ -24,6 +24,10 @@ final class RecordingGutenbergHttpClient implements GutenbergHttpClient {
 
 	static RecordingGutenbergHttpClient withResponses(Map<String, String> responses) {
 		return new RecordingGutenbergHttpClient(responses, "", true);
+	}
+
+	static RecordingGutenbergHttpClient sequence(List<String> responses) {
+		return new RecordingGutenbergHttpClientSequence(responses);
 	}
 
 	@Override
@@ -44,5 +48,24 @@ final class RecordingGutenbergHttpClient implements GutenbergHttpClient {
 			return "";
 		}
 		return requestedUrls.get(requestedUrls.size() - 1);
+	}
+
+	private static final class RecordingGutenbergHttpClientSequence extends RecordingGutenbergHttpClient {
+		private final List<String> responses;
+		private int index;
+
+		private RecordingGutenbergHttpClientSequence(List<String> responses) {
+			super(Map.of(), "", false);
+			this.responses = List.copyOf(responses);
+		}
+
+		@Override
+		public String get(String url) {
+			super.get(url);
+			if (index >= responses.size()) {
+				throw new IllegalStateException("No response configured for " + url);
+			}
+			return responses.get(index++);
+		}
 	}
 }

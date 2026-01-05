@@ -14,6 +14,10 @@
     button { margin-top: 1rem; padding: 0.6rem 1.2rem; background: #4d3b2f; color: #fff; border: none; }
     .answer { margin-top: 1.5rem; padding: 1rem; background: #f2eadc; border: 1px solid #d6cab6; }
     .muted { color: #6f675f; }
+    .history { margin-top: 1.5rem; }
+    .history h2 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .turn { padding: 0.8rem; border: 1px solid #e2d9c8; margin-top: 0.6rem; background: #fff8ea; }
+    .turn p { margin: 0.2rem 0; }
   </style>
 </head>
 <body>
@@ -31,6 +35,14 @@
       <p><strong>Status:</strong> <span th:text="${status}"></span></p>
       <p th:if="${answer != ''}"><strong>Answer:</strong> <span th:text="${answer}"></span></p>
       <p th:if="${reason != ''}"><strong>Reason:</strong> <span th:text="${reason}"></span></p>
+    </div>
+
+    <div class="history" th:if="${history != null and !history.isEmpty()}">
+      <h2>Conversation history</h2>
+      <div class="turn" th:each="turn : ${history}">
+        <p><strong>Q:</strong> <span th:text="${turn.question}"></span></p>
+        <p><strong>A:</strong> <span th:text="${turn.answer}"></span></p>
+      </div>
     </div>
   </div>
 </body>

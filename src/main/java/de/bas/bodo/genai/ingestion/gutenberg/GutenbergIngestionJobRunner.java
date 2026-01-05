@@ -27,9 +27,10 @@ public final class GutenbergIngestionJobRunner implements GutenbergIngestionJob 
 	@Override
 	public void ingestAll() {
 		int authorId = properties.getAuthorId();
+		String authorName = properties.getAuthorName();
 		int maxCount = properties.getMaxDownloadCount();
-		logger.info("Starting Gutenberg ingestion for author {} (max {} works).", authorId, maxCount);
-		List<GutenbergWork> works = catalog.fetchWorksByAuthorId(authorId);
+		logger.info("Starting Gutenberg ingestion for author {} (id {}, max {} works).", authorName, authorId, maxCount);
+		List<GutenbergWork> works = catalog.fetchWorksByAuthorName(authorName);
 		int limit = Math.min(maxCount, works.size());
 		for (int i = 0; i < limit; i++) {
 			GutenbergWork work = works.get(i);

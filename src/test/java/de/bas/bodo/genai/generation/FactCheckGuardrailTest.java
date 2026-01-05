@@ -3,6 +3,7 @@ package de.bas.bodo.genai.generation;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.bas.bodo.genai.generation.internal.FactCheckGuardrail;
+import de.bas.bodo.genai.generation.internal.GenerationClient;
 import de.bas.bodo.genai.generation.internal.GuardrailResult;
 import de.bas.bodo.genai.generation.testing.GenerationTestFixtures;
 import de.bas.bodo.genai.retrieval.RetrievalResult;
@@ -21,13 +22,16 @@ class FactCheckGuardrailTest {
 	private static final String GROUNDED_ANSWER = GenerationTestFixtures.GROUNDED_ANSWER;
 	private static final String UNGROUNDED_ANSWER = GenerationTestFixtures.UNGROUNDED_ANSWER;
 	private static final String UNGROUNDED_REASON = "Answer is not grounded in provided context.";
+	private static final String GROUNDED_RESPONSE = "GROUNDED";
+	private static final String UNGROUNDED_RESPONSE = "UNGROUNDED";
 
 	@Nested
 	@DisplayName("validate")
 	class Validate {
 		@Test
 		void allowsGroundedAnswer() {
-			FactCheckGuardrail guardrail = new FactCheckGuardrail();
+			RecordingGenerationClient generationClient = new RecordingGenerationClient(GROUNDED_RESPONSE);
+			FactCheckGuardrail guardrail = new FactCheckGuardrail(generationClient);
 			RetrievalResult retrievalResult = new RetrievalResult(List.of(
 					new RetrievedChunk(WORK_ID, INDEX, CONTEXT_TEXT, SCORE)
 			));
@@ -36,11 +40,13 @@ class FactCheckGuardrailTest {
 
 			assertThat(result.allowed()).isTrue();
 			assertThat(result.reason()).isEmpty();
+			assertThat(generationClient.receivedPrompt()).contains(GROUNDED_ANSWER).contains(CONTEXT_TEXT);
 		}
 
 		@Test
 		void rejectsUngroundedAnswer() {
-			FactCheckGuardrail guardrail = new FactCheckGuardrail();
+			RecordingGenerationClient generationClient = new RecordingGenerationClient(UNGROUNDED_RESPONSE);
+			FactCheckGuardrail guardrail = new FactCheckGuardrail(generationClient);
 			RetrievalResult retrievalResult = new RetrievalResult(List.of(
 					new RetrievedChunk(WORK_ID, INDEX, CONTEXT_TEXT, SCORE)
 			));
@@ -49,6 +55,26 @@ class FactCheckGuardrailTest {
 
 			assertThat(result.allowed()).isFalse();
 			assertThat(result.reason()).isEqualTo(UNGROUNDED_REASON);
+			assertThat(generationClient.receivedPrompt()).contains(UNGROUNDED_ANSWER).contains(CONTEXT_TEXT);
+		}
+	}
+
+	private static final class RecordingGenerationClient implements GenerationClient {
+		private final String response;
+		private String receivedPrompt = "";
+
+		private RecordingGenerationClient(String response) {
+			this.response = response;
+		}
+
+		@Override
+		public String generate(String prompt) {
+			this.receivedPrompt = prompt;
+			return response;
+		}
+
+		private String receivedPrompt() {
+			return receivedPrompt;
 		}
 	}
 }
