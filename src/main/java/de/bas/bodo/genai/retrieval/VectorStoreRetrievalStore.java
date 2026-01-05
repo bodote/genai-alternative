@@ -55,14 +55,11 @@ public final class VectorStoreRetrievalStore implements RetrievalStore {
 		return new StoredChunk(workId, chunkIndex, document.getText(), score);
 	}
 
-	private static int readInt(Map<String, Object> metadata, String key) {
-		Object value = metadata.get(key);
-		if (value instanceof Number number) {
-			return number.intValue();
+		private static int readInt(Map<String, Object> metadata, String key) {
+			Object value = metadata.get(key);
+			if (value instanceof Number number) {
+				return number.intValue();
+			}
+			throw new IllegalStateException("Missing numeric metadata for " + key);
 		}
-		if (value instanceof String text) {
-			return Integer.parseInt(text);
-		}
-		throw new IllegalStateException("Missing numeric metadata for " + key);
 	}
-}

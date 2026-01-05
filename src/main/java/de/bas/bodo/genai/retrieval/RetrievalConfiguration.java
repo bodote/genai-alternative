@@ -5,6 +5,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Wires retrieval beans for the module.
+ *
+ * <p>Creates a {@link QueryEmbeddingClient} adapter around Spring AI's {@link EmbeddingModel}
+ * so the retrieval layer can work with plain float vectors. It also builds the
+ * {@link RetrievalService} using the configured embedding dimension from
+ * {@link RetrievalProperties} and the module-owned {@link RetrievalStore}.</p>
+ */
 @Configuration
 @EnableConfigurationProperties(RetrievalProperties.class)
 public class RetrievalConfiguration {

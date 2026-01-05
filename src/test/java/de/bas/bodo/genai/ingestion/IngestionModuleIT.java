@@ -83,7 +83,8 @@ class IngestionModuleIT {
 	@TestConfiguration
 	static class TestConfig {
 		@Bean
-		RecordingEmbeddingClient embeddingClient() {
+		@Primary
+		RecordingEmbeddingClient testEmbeddingClient() {
 			return RecordingEmbeddingClient.incremental();
 		}
 

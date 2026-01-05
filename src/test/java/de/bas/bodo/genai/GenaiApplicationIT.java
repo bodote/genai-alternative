@@ -25,12 +25,14 @@ class GenaiApplicationIT {
 	@TestConfiguration
 	static class TestConfig {
 		@Bean
-		EmbeddingClient embeddingClient() {
+		@Primary
+		EmbeddingClient testEmbeddingClient() {
 			return texts -> List.of();
 		}
 
 		@Bean
-		GenerationService generationService() {
+		@Primary
+		GenerationService testGenerationService() {
 			return Mockito.mock(GenerationService.class);
 		}
 
