@@ -18,5 +18,5 @@ echo "✅ PostgreSQL is ready"
 
 # Start Spring Boot application
 echo "🌱 Starting Spring Boot application..."
- ./gradlew bootRun
+ ./gradlew bootRun & 
 

@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class IngestionFacade {
+public final class IngestionFacade implements IngestionHandler {
 	private final GutenbergTextCleaner textCleaner;
 	private final TextChunker textChunker;
 	private final EmbeddingIngestionService embeddingIngestionService;
@@ -22,6 +22,7 @@ public final class IngestionFacade {
 		this.embeddingIngestionService = embeddingIngestionService;
 	}
 
+	@Override
 	public void ingestRawText(int workId, String rawText, int maxLength, int overlap) {
 		String cleaned = textCleaner.stripBoilerplate(rawText);
 		String normalized = textCleaner.normalizeWhitespace(cleaned);

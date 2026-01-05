@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-final class GutenbergCatalogClient {
+final class GutenbergCatalogClient implements GutenbergCatalog {
 	private static final String AUTHOR_URL_PREFIX = "https://www.gutenberg.org/ebooks/author/";
 	private static final Pattern WORK_PATTERN = Pattern.compile(
 			"<a\\s+href=\\\"/ebooks/(\\d+)\\\"[^>]*>\\s*<span\\s+class=\\\"title\\\">(.*?)</span>",
@@ -18,7 +18,8 @@ final class GutenbergCatalogClient {
 		this.httpClient = httpClient;
 	}
 
-	List<GutenbergWork> fetchWorksByAuthorId(int authorId) {
+	@Override
+	public List<GutenbergWork> fetchWorksByAuthorId(int authorId) {
 		String html = httpClient.get(AUTHOR_URL_PREFIX + authorId);
 		return parseWorks(html);
 	}

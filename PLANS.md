@@ -67,6 +67,9 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
 ## Phase 5: Observability & Ops
 1) application start:
    - check if the vectorstore already contains Sherlock Holms books. only If its empty ingest all book about Sherlock Holms from Gutenberg
+   - run synchronously at startup
+   - configurable ingestion settings: author id, chunk size, overlap, max download count
+   - info logging for startup ingestion decisions and progress
 1) Logging & metrics
    - Log ingestion progress, retrieval hits, guardrail outcomes.
 2) Admin tasks

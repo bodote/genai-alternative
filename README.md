@@ -139,6 +139,11 @@ spring:
 server:
   port: 8081
 genai:
+  ingestion:
+    author-id: 69
+    chunk-size: 1000
+    chunk-overlap: 100
+    max-download-count: 2
   generation:
     history-max-turns: 20
   retrieval:

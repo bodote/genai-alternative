@@ -3,7 +3,7 @@ package de.bas.bodo.genai.ingestion.gutenberg;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-final class GutenbergDownloadClient {
+final class GutenbergDownloadClient implements GutenbergDownloader {
 	private static final String WORK_PAGE_PREFIX = "https://www.gutenberg.org/ebooks/";
 	private static final String GUTENBERG_HOST = "https://www.gutenberg.org";
 	private static final Pattern TEXT_LINK_PATTERN = Pattern.compile("href=\\\"([^\\\"]+\\.txt(?:\\.utf-8)?)\\\"");
@@ -16,7 +16,8 @@ final class GutenbergDownloadClient {
 		this.textStore = textStore;
 	}
 
-	void downloadWork(int workId) {
+	@Override
+	public void downloadWork(int workId) {
 		String workPageUrl = WORK_PAGE_PREFIX + workId;
 		String html = httpClient.get(workPageUrl);
 		String textUrl = resolveTextUrl(html);
