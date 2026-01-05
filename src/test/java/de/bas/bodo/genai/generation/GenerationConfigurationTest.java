@@ -2,6 +2,7 @@ package de.bas.bodo.genai.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.bas.bodo.genai.generation.GenerationHistorySettings;
 import de.bas.bodo.genai.generation.internal.GenerationConfiguration;
 import de.bas.bodo.genai.retrieval.RetrievalGateway;
 import de.bas.bodo.genai.retrieval.RetrievalResult;
@@ -20,6 +21,7 @@ class GenerationConfigurationTest {
 	private static final int TOP_K = 4;
 	private static final RetrievedChunk CONTEXT_CHUNK = new RetrievedChunk(1, 0, ANSWER, 0.9);
 	private static final RetrievalResult RETRIEVAL_RESULT = new RetrievalResult(List.of(CONTEXT_CHUNK));
+	private static final int HISTORY_MAX_TURNS = 20;
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withUserConfiguration(GenerationConfiguration.class);
@@ -42,6 +44,23 @@ class GenerationConfigurationTest {
 					assertThat(result.status()).isEqualTo(GenerationStatus.OK);
 					assertThat(result.answer()).isEqualTo(ANSWER);
 					assertThat(retrievalGateway.recordedTopK()).isEqualTo(TOP_K);
+				});
+	}
+
+	@Test
+	void exposesHistorySettingsFromConfiguration() {
+		ChatModel chatModel = Mockito.mock(ChatModel.class);
+		Mockito.when(chatModel.call(Mockito.anyString())).thenReturn(ANSWER);
+		RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(RETRIEVAL_RESULT);
+
+		contextRunner
+				.withPropertyValues("genai.generation.history-max-turns=" + HISTORY_MAX_TURNS)
+				.withBean(ChatModel.class, () -> chatModel)
+				.withBean(RetrievalGateway.class, () -> retrievalGateway)
+				.run(context -> {
+					GenerationHistorySettings settings = context.getBean(GenerationHistorySettings.class);
+
+					assertThat(settings.maxTurns()).isEqualTo(HISTORY_MAX_TURNS);
 				});
 	}
 

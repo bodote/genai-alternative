@@ -1,5 +1,6 @@
 package de.bas.bodo.genai.generation.internal;
 
+import de.bas.bodo.genai.generation.GenerationHistorySettings;
 import de.bas.bodo.genai.generation.GenerationService;
 import de.bas.bodo.genai.retrieval.RetrievalGateway;
 import org.springframework.ai.chat.model.ChatModel;
@@ -54,5 +55,10 @@ public class GenerationConfiguration {
 				generationClient,
 				properties.getTopK()
 		);
+	}
+
+	@Bean
+	GenerationHistorySettings generationHistorySettings(GenerationProperties properties) {
+		return new GenerationHistorySettings(properties.getHistoryMaxTurns());
 	}
 }

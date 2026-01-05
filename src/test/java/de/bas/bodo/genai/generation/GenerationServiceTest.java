@@ -2,6 +2,7 @@ package de.bas.bodo.genai.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.bas.bodo.genai.generation.ConversationTurn;
 import de.bas.bodo.genai.generation.internal.FactCheckGuardrail;
 import de.bas.bodo.genai.generation.internal.GenerationClient;
 import de.bas.bodo.genai.generation.internal.InputGuardrail;
@@ -29,6 +30,8 @@ class GenerationServiceTest {
 	private static final String UNGROUNDED_ANSWER = GenerationTestFixtures.UNGROUNDED_ANSWER;
 	private static final String INPUT_BLOCK_REASON = "Input violates safety policy.";
 	private static final String FACT_BLOCK_REASON = "Answer is not grounded in provided context.";
+	private static final String HISTORY_QUESTION = "Where does Holmes live?";
+	private static final String HISTORY_ANSWER = "Holmes lives at 221B Baker Street.";
 
 	@Nested
 	@DisplayName("answer")
@@ -58,6 +61,32 @@ class GenerationServiceTest {
 			assertThat(retrievalGateway.receivedQuery()).isEqualTo(QUESTION);
 			assertThat(retrievalGateway.receivedTopK()).isEqualTo(TOP_K);
 			assertThat(generationClient.receivedPrompt()).contains(QUESTION).contains(CONTEXT_TEXT);
+		}
+
+		@Test
+		void appendsConversationHistoryToPrompt() {
+			RetrievalResult retrievalResult = new RetrievalResult(List.of(
+					new RetrievedChunk(WORK_ID, INDEX, CONTEXT_TEXT, SCORE)
+			));
+			RecordingRetrievalGateway retrievalGateway = new RecordingRetrievalGateway(retrievalResult);
+			RecordingGenerationClient generationClient = new RecordingGenerationClient(GROUNDED_ANSWER);
+			GenerationService service = new GenerationService(
+					retrievalGateway,
+					new PromptAssembler(),
+					new InputGuardrail(),
+					new OutputGuardrail(),
+					new FactCheckGuardrail(),
+					generationClient,
+					TOP_K
+			);
+
+			service.answer(QUESTION, List.of(new ConversationTurn(HISTORY_QUESTION, HISTORY_ANSWER)));
+
+			assertThat(generationClient.receivedPrompt())
+					.contains("Previous conversation:")
+					.contains("User: " + HISTORY_QUESTION)
+					.contains("Assistant: " + HISTORY_ANSWER)
+					.contains("Question: " + QUESTION);
 		}
 
 		@Test

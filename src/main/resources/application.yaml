@@ -12,6 +12,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/sherlock
     username: sherlock
     password: sherlock
+server:
+  port: 8081
 genai:
+  generation:
+    history-max-turns: 20
   retrieval:
     embedding-dimension: 1536

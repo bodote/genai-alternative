@@ -113,7 +113,15 @@ docker run -d --name sherlock-postgres \
 ./gradlew bootRun
 ```
 
-Then visit http://localhost:8080 to use the chat interface.
+Then visit http://localhost:8081 to use the chat interface.
+
+You can also use the helper script:
+
+```bash
+./app.sh start
+./app.sh status
+./app.sh stop
+```
 
 ### Configuration
 
@@ -128,12 +136,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/sherlock
     username: sherlock
     password: sherlock
-sherlock:
-  ingestion:
-    chunk-size: 2000
-    chunk-overlap: 100
+server:
+  port: 8081
+genai:
+  generation:
+    history-max-turns: 20
   retrieval:
-    top-k: 3
+    embedding-dimension: 1536
 ```
 
 ## Development
@@ -211,4 +220,3 @@ open build/reports/jacoco/test/html/index.html
 ## License
 
 Public domain texts from Project Gutenberg. Application code under Apache 2.0.
-

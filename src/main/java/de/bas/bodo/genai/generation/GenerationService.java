@@ -8,6 +8,7 @@ import de.bas.bodo.genai.generation.internal.GuardrailResult;
 import de.bas.bodo.genai.generation.internal.InputGuardrail;
 import de.bas.bodo.genai.generation.internal.OutputGuardrail;
 import de.bas.bodo.genai.generation.internal.PromptAssembler;
+import java.util.List;
 
 public class GenerationService {
 	private final RetrievalGateway retrievalGateway;
@@ -37,12 +38,16 @@ public class GenerationService {
 	}
 
 	public GenerationResult answer(String question) {
+		return answer(question, List.of());
+	}
+
+	public GenerationResult answer(String question, List<ConversationTurn> history) {
 		GuardrailResult inputResult = inputGuardrail.validate(question);
 		if (!inputResult.allowed()) {
 			return GenerationResult.inputBlocked(inputResult.reason());
 		}
 		RetrievalResult retrievalResult = retrievalGateway.retrieve(question, topK);
-		String prompt = promptAssembler.assemble(question, retrievalResult);
+		String prompt = promptAssembler.assemble(question, retrievalResult, history);
 		String response = generationClient.generate(prompt);
 		GuardrailResult outputResult = outputGuardrail.validate(response);
 		if (!outputResult.allowed()) {
