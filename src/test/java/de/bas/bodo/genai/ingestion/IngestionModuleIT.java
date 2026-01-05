@@ -3,10 +3,11 @@ package de.bas.bodo.genai.ingestion;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import de.bas.bodo.genai.ingestion.testing.RecordingEmbeddingClient;
 import de.bas.bodo.genai.ingestion.testing.RecordingRetrievalStore;
 import de.bas.bodo.genai.ingestion.testing.IngestionTestcontainersConfiguration;
+import de.bas.bodo.genai.ingestion.internal.IngestionFacade;
+import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

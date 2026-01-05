@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
 public class InputGuardrail {
 	private static final String BLANK_REASON = "Input is blank.";

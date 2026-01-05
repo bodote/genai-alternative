@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import de.bas.bodo.genai.retrieval.internal.InternalRetrievalStore;
+import de.bas.bodo.genai.retrieval.internal.RetrievalConfiguration;
+import de.bas.bodo.genai.retrieval.internal.RetrievalService;
+import de.bas.bodo.genai.retrieval.internal.StoredChunk;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -69,7 +73,7 @@ class RetrievalConfigurationTest {
 		runner.run(context -> assertThat(context).hasFailed());
 	}
 
-	static final class RecordingRetrievalStore implements RetrievalStore {
+	static final class RecordingRetrievalStore implements InternalRetrievalStore {
 		private String receivedQuery = "";
 		private int receivedTopK;
 

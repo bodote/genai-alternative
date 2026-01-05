@@ -1,5 +1,6 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
+import de.bas.bodo.genai.generation.GenerationService;
 import de.bas.bodo.genai.retrieval.RetrievalGateway;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

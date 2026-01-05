@@ -2,6 +2,8 @@ package de.bas.bodo.genai.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.bas.bodo.genai.generation.internal.GuardrailResult;
+import de.bas.bodo.genai.generation.internal.OutputGuardrail;
 import de.bas.bodo.genai.generation.testing.GenerationTestFixtures;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

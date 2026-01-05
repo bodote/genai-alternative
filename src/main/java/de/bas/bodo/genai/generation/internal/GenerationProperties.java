@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

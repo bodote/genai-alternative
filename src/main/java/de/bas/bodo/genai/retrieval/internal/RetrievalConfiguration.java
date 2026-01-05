@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.retrieval;
+package de.bas.bodo.genai.retrieval.internal;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,7 +24,7 @@ public class RetrievalConfiguration {
 	@Bean
 	RetrievalService retrievalService(
 			QueryEmbeddingClient embeddingClient,
-			RetrievalStore retrievalStore,
+			InternalRetrievalStore retrievalStore,
 			RetrievalProperties properties
 	) {
 		return new RetrievalService(embeddingClient, retrievalStore, properties.getEmbeddingDimension());

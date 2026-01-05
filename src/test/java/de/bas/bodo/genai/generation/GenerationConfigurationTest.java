@@ -2,6 +2,7 @@ package de.bas.bodo.genai.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.bas.bodo.genai.generation.internal.GenerationConfiguration;
 import de.bas.bodo.genai.retrieval.RetrievalGateway;
 import de.bas.bodo.genai.retrieval.RetrievalResult;
 import de.bas.bodo.genai.retrieval.RetrievedChunk;

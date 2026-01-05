@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
 public record GuardrailResult(boolean allowed, String reason) {
 	static GuardrailResult allow() {

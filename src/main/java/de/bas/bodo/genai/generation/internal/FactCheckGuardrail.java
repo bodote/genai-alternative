@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
 import de.bas.bodo.genai.retrieval.RetrievalResult;
 import de.bas.bodo.genai.retrieval.RetrievedChunk;

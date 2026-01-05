@@ -3,6 +3,10 @@ package de.bas.bodo.genai.retrieval;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import de.bas.bodo.genai.retrieval.internal.InternalRetrievalStore;
+import de.bas.bodo.genai.retrieval.internal.QueryEmbeddingClient;
+import de.bas.bodo.genai.retrieval.internal.RetrievalService;
+import de.bas.bodo.genai.retrieval.internal.StoredChunk;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -90,7 +94,7 @@ class RetrievalServiceTest {
 		}
 	}
 
-	private static final class RecordingRetrievalStore implements RetrievalStore {
+	private static final class RecordingRetrievalStore implements InternalRetrievalStore {
 		private final List<StoredChunk> storedChunks;
 		private String receivedQuery = "";
 		private int receivedTopK;

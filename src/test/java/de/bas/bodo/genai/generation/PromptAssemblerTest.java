@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import de.bas.bodo.genai.generation.testing.GenerationTestFixtures;
 import de.bas.bodo.genai.retrieval.RetrievalResult;
+import de.bas.bodo.genai.generation.internal.PromptAssembler;
 import de.bas.bodo.genai.retrieval.RetrievedChunk;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

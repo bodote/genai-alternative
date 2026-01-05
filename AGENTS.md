@@ -15,6 +15,7 @@ In Spring Modulith 2.x, a module’s base package is its API package, and only t
 
 Spring Modulith rules to follow:
 - Each direct sub-package of the main application package is treated as a module by default.
+- The module’s base package should contain only the public API intended for other modules.
 - Sub-packages of a module are internal and must not be referenced by other modules.
 - Use `@NamedInterface` on `package-info.java` to expose additional packages when cross-module access is required.
 - Use `@ApplicationModule(allowedDependencies = ...)` to restrict permitted module dependencies.

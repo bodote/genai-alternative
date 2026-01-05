@@ -2,6 +2,12 @@ package de.bas.bodo.genai.generation;
 
 import de.bas.bodo.genai.retrieval.RetrievalGateway;
 import de.bas.bodo.genai.retrieval.RetrievalResult;
+import de.bas.bodo.genai.generation.internal.FactCheckGuardrail;
+import de.bas.bodo.genai.generation.internal.GenerationClient;
+import de.bas.bodo.genai.generation.internal.GuardrailResult;
+import de.bas.bodo.genai.generation.internal.InputGuardrail;
+import de.bas.bodo.genai.generation.internal.OutputGuardrail;
+import de.bas.bodo.genai.generation.internal.PromptAssembler;
 
 public class GenerationService {
 	private final RetrievalGateway retrievalGateway;

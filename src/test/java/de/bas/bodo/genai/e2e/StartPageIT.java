@@ -6,7 +6,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import de.bas.bodo.genai.ingestion.IngestionFacade;
+import de.bas.bodo.genai.ingestion.internal.IngestionFacade;
 import de.bas.bodo.genai.ingestion.testing.IngestionTestcontainersConfiguration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;

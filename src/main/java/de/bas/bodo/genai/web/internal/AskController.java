@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.web;
+package de.bas.bodo.genai.web.internal;
 
 import de.bas.bodo.genai.generation.GenerationService;
 import org.springframework.stereotype.Controller;

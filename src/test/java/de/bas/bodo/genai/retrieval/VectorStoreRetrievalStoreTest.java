@@ -2,6 +2,8 @@ package de.bas.bodo.genai.retrieval;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.bas.bodo.genai.retrieval.internal.StoredChunk;
+import de.bas.bodo.genai.retrieval.internal.VectorStoreRetrievalStore;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;

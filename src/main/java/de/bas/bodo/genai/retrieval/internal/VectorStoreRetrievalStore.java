@@ -1,5 +1,6 @@
-package de.bas.bodo.genai.retrieval;
+package de.bas.bodo.genai.retrieval.internal;
 
+import de.bas.bodo.genai.retrieval.EmbeddedChunk;
 import java.util.List;
 import java.util.Map;
 import org.springframework.ai.document.Document;
@@ -8,7 +9,7 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class VectorStoreRetrievalStore implements RetrievalStore {
+public final class VectorStoreRetrievalStore implements InternalRetrievalStore {
 	public static final String METADATA_WORK_ID = "workId";
 	public static final String METADATA_CHUNK_INDEX = "chunkIndex";
 
@@ -55,11 +56,11 @@ public final class VectorStoreRetrievalStore implements RetrievalStore {
 		return new StoredChunk(workId, chunkIndex, document.getText(), score);
 	}
 
-		private static int readInt(Map<String, Object> metadata, String key) {
-			Object value = metadata.get(key);
-			if (value instanceof Number number) {
-				return number.intValue();
-			}
-			throw new IllegalStateException("Missing numeric metadata for " + key);
+	private static int readInt(Map<String, Object> metadata, String key) {
+		Object value = metadata.get(key);
+		if (value instanceof Number number) {
+			return number.intValue();
 		}
+		throw new IllegalStateException("Missing numeric metadata for " + key);
 	}
+}

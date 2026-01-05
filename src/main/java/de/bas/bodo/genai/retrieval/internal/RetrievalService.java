@@ -1,13 +1,16 @@
-package de.bas.bodo.genai.retrieval;
+package de.bas.bodo.genai.retrieval.internal;
 
+import de.bas.bodo.genai.retrieval.RetrievalGateway;
+import de.bas.bodo.genai.retrieval.RetrievalResult;
+import de.bas.bodo.genai.retrieval.RetrievedChunk;
 import java.util.List;
 
 public final class RetrievalService implements RetrievalGateway {
 	private final QueryEmbeddingClient embeddingClient;
-	private final RetrievalStore retrievalStore;
+	private final InternalRetrievalStore retrievalStore;
 	private final int embeddingDimension;
 
-	public RetrievalService(QueryEmbeddingClient embeddingClient, RetrievalStore retrievalStore, int embeddingDimension) {
+	public RetrievalService(QueryEmbeddingClient embeddingClient, InternalRetrievalStore retrievalStore, int embeddingDimension) {
 		this.embeddingClient = embeddingClient;
 		this.retrievalStore = retrievalStore;
 		this.embeddingDimension = embeddingDimension;
@@ -22,6 +25,9 @@ public final class RetrievalService implements RetrievalGateway {
 			);
 		}
 		List<StoredChunk> storedChunks = retrievalStore.search(query, topK);
-		return RetrievalResult.fromStored(storedChunks);
+		List<RetrievedChunk> chunks = storedChunks.stream()
+				.map(chunk -> new RetrievedChunk(chunk.workId(), chunk.index(), chunk.text(), chunk.score()))
+				.toList();
+		return new RetrievalResult(chunks);
 	}
 }

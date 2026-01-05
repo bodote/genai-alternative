@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.ingestion;
+package de.bas.bodo.genai.ingestion.internal;
 
 import de.bas.bodo.genai.ingestion.chunking.TextChunker;
 import de.bas.bodo.genai.ingestion.embedding.EmbeddingIngestionService;

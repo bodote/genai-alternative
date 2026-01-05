@@ -209,3 +209,7 @@ open build/reports/jacoco/test/html/index.html
 ## License
 
 Public domain texts from Project Gutenberg. Application code under Apache 2.0.
+
+## TODO: 
+- change the architecture so that only the retrieval module connects to the vector database. first change the [README.md](README.md) then check if the source code is accordingly structured. 
+- check if our [PLANS.md](PLANS.md) actually contains all the planed features from "Features" paragraph in [README.md](README.md)

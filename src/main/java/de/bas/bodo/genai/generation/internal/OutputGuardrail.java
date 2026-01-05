@@ -1,4 +1,4 @@
-package de.bas.bodo.genai.generation;
+package de.bas.bodo.genai.generation.internal;
 
 public class OutputGuardrail {
 	private static final String UNSAFE_REASON = "Output violates safety policy.";
