@@ -62,6 +62,8 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
    - Clear user feedback for ingestion not run / no results / guardrail block.
 
 ## Phase 5: Observability & Ops
+1) application start:
+   - check if the vectorstore already contains Sherlock Holms books. only If its empty ingest all book about Sherlock Holms from Gutenberg
 1) Logging & metrics
    - Log ingestion progress, retrieval hits, guardrail outcomes.
 2) Admin tasks

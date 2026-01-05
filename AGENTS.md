@@ -8,6 +8,19 @@ always use JSpecify for nullablilty check, add `@NullMarked` to  all packages  t
 
 use `gradle` as the build tool
 
+When moving a Java class to a new package, **never** delete and recreate it; use `git mv` instead.
+
+In Spring Modulith 2.x, a module’s base package is its API package, and only that package may be referenced by other modules by default.
+
+
+Spring Modulith rules to follow:
+- Each direct sub-package of the main application package is treated as a module by default.
+- Sub-packages of a module are internal and must not be referenced by other modules.
+- Use `@NamedInterface` on `package-info.java` to expose additional packages when cross-module access is required.
+- Use `@ApplicationModule(allowedDependencies = ...)` to restrict permitted module dependencies.
+- Run architectural verification to enforce no cycles and API-only access.
+- Prefer closed modules; use open modules only for legacy migration.
+
 
 
 # Principles for writing automated tests
