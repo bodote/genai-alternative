@@ -30,7 +30,7 @@ Public LLM-based chatbots often struggle with detailed questions about classic l
 │  │ • Download  │    │ • Query     │    │ • Augment Prompt        │  │
 │  │ • Chunk     │    │   Embed     │    │ • Generate Response     │  │
 │  │ • Embed     │    │ • Top-K     │    │ • Input/Output Guards   │  │
-│  │ • Store     │    │   Search    │    │ • Fact-Check            │  │
+│  │ • Publish   │    │   Search    │    │ • Fact-Check            │  │
 │  │             │    │             │    │ • Conversation History  │  │
 │  └──────┬──────┘    └──────┬──────┘    └────────────┬────────────┘  │
 │         │                  │                        │               │
@@ -39,6 +39,8 @@ Public LLM-based chatbots often struggle with detailed questions about classic l
 │                    ┌───────▼───────┐                                │
 │                    │  PostgreSQL   │                                │
 │                    │  + pgvector   │                                │
+│                    │ (Retrieval    │                                │
+│                    │  owns DB)     │                                │
 │                    └───────────────┘                                │
 ├─────────────────────────────────────────────────────────────────────┤
 │  ┌─────────────────────────────────────────────────────────────┐    │
@@ -60,7 +62,7 @@ Public LLM-based chatbots often struggle with detailed questions about classic l
 - **Language**: Java 21
 - **Build**: Gradle
 - **AI Provider**: OpenAI (embeddings + chat)
-- **Vector Store**: PostgreSQL with pgvector extension
+- **Vector Store**: PostgreSQL with pgvector extension (owned exclusively by the retrieval module)
 - **Testing**: JUnit 5, TestContainers (PostgreSQL), Playwright (E2E)
 - **Web**: Thymeleaf + static HTML/CSS/JS frontend
 
@@ -210,6 +212,3 @@ open build/reports/jacoco/test/html/index.html
 
 Public domain texts from Project Gutenberg. Application code under Apache 2.0.
 
-## TODO: 
-- change the architecture so that only the retrieval module connects to the vector database. first change the [README.md](README.md) then check if the source code is accordingly structured. 
-- check if our [PLANS.md](PLANS.md) actually contains all the planed features from "Features" paragraph in [README.md](README.md)

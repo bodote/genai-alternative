@@ -60,6 +60,9 @@ Principles: TDD first, Spring Modulith package boundaries, JSpecify `@NullMarked
    - Minimal landing page with question input and answer panel.
 3) Error handling
    - Clear user feedback for ingestion not run / no results / guardrail block.
+4) Conversation history
+   - Persist session-based chat history for contextual follow-up questions.
+   - Tests for retaining history per session and including it in prompt assembly.
 
 ## Phase 5: Observability & Ops
 1) application start:
