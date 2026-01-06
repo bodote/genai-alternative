@@ -15,9 +15,9 @@ Container_Boundary("GenaiApplication.GenaiApplication_boundary", "GenaiApplicati
   Component(GenaiApplication.GenaiApplication.Web, "Web", $techn="Module", $descr="", $tags="", $link="")
 }
 
+Rel(GenaiApplication.GenaiApplication.Generation, GenaiApplication.GenaiApplication.Retrieval, "uses", $techn="", $tags="", $link="")
 Rel(GenaiApplication.GenaiApplication.Ingestion, GenaiApplication.GenaiApplication.Retrieval, "uses", $techn="", $tags="", $link="")
 Rel(GenaiApplication.GenaiApplication.Web, GenaiApplication.GenaiApplication.Generation, "uses", $techn="", $tags="", $link="")
-Rel(GenaiApplication.GenaiApplication.Generation, GenaiApplication.GenaiApplication.Retrieval, "uses", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

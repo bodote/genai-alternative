@@ -4,8 +4,12 @@ set -eu
 cmd="${1:-}"
 
 case "$cmd" in
+  start-clean)
+    ./gradlew bootRun --args='--cleanDB' > /tmp/genai-boot.log 2>&1 &
+    echo "Started app (bootRun) in background. Logs: /tmp/genai-boot.log"
+    ;;
   start)
-    ./gradlew bootRun > /tmp/genai-boot.log 2>&1 &
+    ./gradlew bootRun  > /tmp/genai-boot.log 2>&1 &
     echo "Started app (bootRun) in background. Logs: /tmp/genai-boot.log"
     ;;
   stop)

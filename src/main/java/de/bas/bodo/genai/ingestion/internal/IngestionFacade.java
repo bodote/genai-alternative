@@ -23,10 +23,10 @@ public final class IngestionFacade implements IngestionHandler {
 	}
 
 	@Override
-	public void ingestRawText(int workId, String rawText, int maxLength, int overlap) {
+	public void ingestRawText(int workId, String rawText, int maxLength, int overlap, int minimumLength) {
 		String cleaned = textCleaner.stripBoilerplate(rawText);
 		String normalized = textCleaner.normalizeWhitespace(cleaned);
-		List<String> chunks = textChunker.chunkRecursively(normalized, maxLength, overlap);
+		List<String> chunks = textChunker.chunkRecursively(normalized, maxLength, overlap, minimumLength);
 		embeddingIngestionService.ingest(workId, chunks);
 	}
 }

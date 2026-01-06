@@ -49,8 +49,11 @@ class StartPageIT {
 	private static final String ROOT_PATH = "/";
 	private static final String QUESTION = "Lucy noticed a number on the ceiling when taking breakfast. which number was written into the ceiling?";
 	private static final String ANSWER = "Lucy noticed the number 28 written into the ceiling with black charcoal.";
+	private static final String GROUNDED_RESPONSE = "GROUNDED";
+	private static final String FACT_CHECK_MARKER = "FACT_CHECK";
 	private static final int WORK_ID = 28;
 	private static final int CHUNK_SIZE = 500;
+	private static final int MINIMUM_CHUNK_SIZE = 0;
 	private static final int CHUNK_OVERLAP = 0;
 
 	@LocalServerPort
@@ -65,7 +68,8 @@ class StartPageIT {
 				WORK_ID,
 				"Lucy noticed the number 28 written into the ceiling with black charcoal.",
 				CHUNK_SIZE,
-				CHUNK_OVERLAP
+				CHUNK_OVERLAP,
+				MINIMUM_CHUNK_SIZE
 		);
 	}
 
@@ -116,7 +120,13 @@ class StartPageIT {
 		@Primary
 		ChatModel chatModel() {
 			ChatModel chatModel = Mockito.mock(ChatModel.class);
-			Mockito.when(chatModel.call(Mockito.anyString())).thenReturn(ANSWER);
+			Mockito.when(chatModel.call(Mockito.anyString())).thenAnswer(invocation -> {
+				String prompt = invocation.getArgument(0);
+				if (prompt.contains(FACT_CHECK_MARKER)) {
+					return GROUNDED_RESPONSE;
+				}
+				return ANSWER;
+			});
 			return chatModel;
 		}
 	}

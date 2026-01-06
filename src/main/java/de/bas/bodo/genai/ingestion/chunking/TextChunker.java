@@ -2,10 +2,14 @@ package de.bas.bodo.genai.ingestion.chunking;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public final class TextChunker {
+	private static final Logger logger = LoggerFactory.getLogger(TextChunker.class);
+
 	public List<String> chunk(String text, int maxLength, int overlap) {
 		if (text.isEmpty()) {
 			return List.of();
@@ -26,10 +30,16 @@ public final class TextChunker {
 				break;
 			}
 		}
-		return List.copyOf(chunks);
+		List<String> result = List.copyOf(chunks);
+		logStats("chunk", result);
+		return result;
 	}
 
 	public List<String> chunkRecursively(String text, int maxLength, int overlap) {
+		return chunkRecursively(text, maxLength, overlap, 0);
+	}
+
+	public List<String> chunkRecursively(String text, int maxLength, int overlap, int minimumLength) {
 		String trimmed = text.trim();
 		if (trimmed.isEmpty()) {
 			return List.of();
@@ -54,7 +64,12 @@ public final class TextChunker {
 				}
 			}
 		}
-		return List.copyOf(result);
+		List<String> chunks = List.copyOf(result);
+		if (minimumLength > 0) {
+			chunks = mergeSmallChunks(chunks, minimumLength);
+		}
+		logStats("chunkRecursively", chunks);
+		return chunks;
 	}
 
 	private static List<String> splitOnRegex(String text, String regex) {
@@ -120,5 +135,44 @@ public final class TextChunker {
 			overlapped.add(builder.toString());
 		}
 		return List.copyOf(overlapped);
+	}
+
+	private static List<String> mergeSmallChunks(List<String> chunks, int minimumLength) {
+		if (chunks.isEmpty()) {
+			return chunks;
+		}
+		List<String> merged = new ArrayList<>();
+		int index = 0;
+		while (index < chunks.size()) {
+			StringBuilder builder = new StringBuilder(chunks.get(index));
+			while (builder.length() < minimumLength && index + 1 < chunks.size()) {
+				index++;
+				builder.append(' ').append(chunks.get(index));
+			}
+			merged.add(builder.toString());
+			index++;
+		}
+		return List.copyOf(merged);
+	}
+
+	private static void logStats(String method, List<String> chunks) {
+		if (!logger.isDebugEnabled()) {
+			return;
+		}
+		if (chunks.isEmpty()) {
+			logger.debug("{} produced 0 chunks (min=0, mean=0.0, max=0).", method);
+			return;
+		}
+		java.util.IntSummaryStatistics stats = chunks.stream()
+				.mapToInt(String::length)
+				.summaryStatistics();
+		logger.debug(
+				"{} produced {} chunks (min={}, mean={}, max={}).",
+				method,
+				chunks.size(),
+				stats.getMin(),
+				String.format(java.util.Locale.ROOT, "%.1f", stats.getAverage()),
+				stats.getMax()
+		);
 	}
 }

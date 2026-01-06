@@ -23,6 +23,7 @@ class TextChunkerTest {
 	private static final String EXTRA_PARAGRAPH = "Tail.";
 	private static final String EXACT_SENTENCE_WITH_DOUBLE_SPACE = "Alpha  beta.";
 	private static final String EXTRA_SENTENCE = "Tail.";
+	private static final String SHORT_SENTENCES = "One. Two. Three.";
 
 	@Nested
 	@DisplayName("chunk")
@@ -185,6 +186,15 @@ class TextChunkerTest {
 			List<String> chunks = chunker.chunkRecursively(LONG_WORD, 10, 2);
 
 			assertThat(chunks).containsExactly(LONG_WORD);
+		}
+
+		@Test
+		void mergesChunksBelowMinimumSize() {
+			TextChunker chunker = new TextChunker();
+
+			List<String> chunks = chunker.chunkRecursively(SHORT_SENTENCES, 6, 0, 8);
+
+			assertThat(chunks).containsExactly("One. Two.", "Three.");
 		}
 	}
 }

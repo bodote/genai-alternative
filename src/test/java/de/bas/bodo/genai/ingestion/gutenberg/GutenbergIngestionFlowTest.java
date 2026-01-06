@@ -21,6 +21,7 @@ class GutenbergIngestionFlowTest {
 	private static final String AUTHOR_NAME = "Conan Doyle";
 	private static final int WORK_ID = 1661;
 	private static final int CHUNK_SIZE = 1000;
+	private static final int MINIMUM_CHUNK_SIZE = 0;
 	private static final int CHUNK_OVERLAP = 100;
 	private static final int MAX_DOWNLOAD_COUNT = 1;
 	private static final String WORK_TITLE = "A Study in Scarlet";
@@ -50,6 +51,7 @@ class GutenbergIngestionFlowTest {
 		properties.setAuthorName(AUTHOR_NAME);
 		properties.setChunkSize(CHUNK_SIZE);
 		properties.setChunkOverlap(CHUNK_OVERLAP);
+		properties.setChunkSizeMinimum(MINIMUM_CHUNK_SIZE);
 		properties.setMaxDownloadCount(MAX_DOWNLOAD_COUNT);
 		FakeHttpClient httpClient = new FakeHttpClient(Map.of(
 				BOOKS_QUERY_URL, "{\"results\":[{\"id\":" + WORK_ID + ",\"title\":\"" + WORK_TITLE + "\"}]}",

@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "genai.ingestion")
 public class GutenbergIngestionProperties {
 	private int chunkSize = 1000;
+	private int chunkSizeMinimum = 500;
 	private int chunkOverlap = 100;
 	private int maxDownloadCount = 2;
 	private int authorId = 69;
@@ -16,6 +17,14 @@ public class GutenbergIngestionProperties {
 
 	public void setChunkSize(int chunkSize) {
 		this.chunkSize = chunkSize;
+	}
+
+	public int getChunkSizeMinimum() {
+		return chunkSizeMinimum;
+	}
+
+	public void setChunkSizeMinimum(int chunkSizeMinimum) {
+		this.chunkSizeMinimum = chunkSizeMinimum;
 	}
 
 	public int getChunkOverlap() {

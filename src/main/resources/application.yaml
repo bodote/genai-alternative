@@ -14,13 +14,18 @@ spring:
     password: sherlock
 server:
   port: 8081
+logging:
+  level:
+    root: INFO
+    de.bas.bodo: DEBUG
 genai:
   ingestion:
     author-id: 69
     author-name: "Conan Doyle"
     chunk-size: 1000
+    chunk-size-minimum: 400
     chunk-overlap: 100
-    max-download-count: 2
+    max-download-count: 20
     startup:
       enabled: true
     embedding:

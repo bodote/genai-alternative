@@ -26,6 +26,7 @@ import org.springframework.modulith.test.ApplicationModuleTest.BootstrapMode;
 class IngestionModuleIT {
 	private static final int WORK_ID = 1661;
 	private static final int MAX_LENGTH = 12;
+	private static final int MIN_LENGTH = 0;
 	private static final int OVERLAP = 0;
 	private static final String START_MARKER = "*** START OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES ***";
 	private static final String END_MARKER = "*** END OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES ***";
@@ -66,7 +67,7 @@ class IngestionModuleIT {
 				"Footer noise"
 		);
 
-		ingestionFacade.ingestRawText(WORK_ID, raw, MAX_LENGTH, OVERLAP);
+		ingestionFacade.ingestRawText(WORK_ID, raw, MAX_LENGTH, OVERLAP, MIN_LENGTH);
 
 		assertThat(embeddingClient.requestedTexts()).isEqualTo(EXPECTED_CHUNKS);
 		assertThat(retrievalStore.savedChunks())

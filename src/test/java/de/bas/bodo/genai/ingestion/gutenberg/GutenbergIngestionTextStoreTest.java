@@ -13,6 +13,7 @@ class GutenbergIngestionTextStoreTest {
 	private static final String SOURCE_URL = "https://www.gutenberg.org/ebooks/1661.txt";
 	private static final int CHUNK_SIZE = 1000;
 	private static final int CHUNK_OVERLAP = 100;
+	private static final int CHUNK_SIZE_MINIMUM = 500;
 
 	@Test
 	void forwardsTextToIngestionFacadeUsingConfiguredChunking() {
@@ -20,6 +21,7 @@ class GutenbergIngestionTextStoreTest {
 		GutenbergIngestionProperties properties = new GutenbergIngestionProperties();
 		properties.setChunkSize(CHUNK_SIZE);
 		properties.setChunkOverlap(CHUNK_OVERLAP);
+		properties.setChunkSizeMinimum(CHUNK_SIZE_MINIMUM);
 		GutenbergIngestionTextStore textStore = new GutenbergIngestionTextStore(handler, properties);
 
 		textStore.save(WORK_ID, TEXT, SOURCE_URL);
@@ -28,6 +30,7 @@ class GutenbergIngestionTextStoreTest {
 		assertThat(handler.text()).isEqualTo(TEXT);
 		assertThat(handler.chunkSize()).isEqualTo(CHUNK_SIZE);
 		assertThat(handler.chunkOverlap()).isEqualTo(CHUNK_OVERLAP);
+		assertThat(handler.chunkSizeMinimum()).isEqualTo(CHUNK_SIZE_MINIMUM);
 	}
 
 	private static final class RecordingIngestionHandler implements IngestionHandler {
@@ -35,13 +38,15 @@ class GutenbergIngestionTextStoreTest {
 		private String text = "";
 		private int chunkSize;
 		private int chunkOverlap;
+		private int chunkSizeMinimum;
 
 		@Override
-		public void ingestRawText(int workId, String rawText, int maxLength, int overlap) {
+		public void ingestRawText(int workId, String rawText, int maxLength, int overlap, int minimumLength) {
 			this.workId = workId;
 			this.text = rawText;
 			this.chunkSize = maxLength;
 			this.chunkOverlap = overlap;
+			this.chunkSizeMinimum = minimumLength;
 		}
 
 		private int workId() {
@@ -58,6 +63,10 @@ class GutenbergIngestionTextStoreTest {
 
 		private int chunkOverlap() {
 			return chunkOverlap;
+		}
+
+		private int chunkSizeMinimum() {
+			return chunkSizeMinimum;
 		}
 	}
 }

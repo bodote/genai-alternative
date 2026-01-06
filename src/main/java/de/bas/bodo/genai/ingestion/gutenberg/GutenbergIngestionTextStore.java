@@ -13,6 +13,12 @@ final class GutenbergIngestionTextStore implements GutenbergTextStore {
 
 	@Override
 	public void save(int workId, String text, String sourceUrl) {
-		ingestionHandler.ingestRawText(workId, text, properties.getChunkSize(), properties.getChunkOverlap());
+		ingestionHandler.ingestRawText(
+				workId,
+				text,
+				properties.getChunkSize(),
+				properties.getChunkOverlap(),
+				properties.getChunkSizeMinimum()
+		);
 	}
 }

@@ -8,7 +8,7 @@ import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 
 @DisplayName("Modularity")
-class ModularityTests {
+class ModularityIT {
 	@Test
 	void verifiesModuleDependencies() {
 		ApplicationModules.of(GenaiApplication.class).verify();
