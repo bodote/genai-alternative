@@ -227,6 +227,15 @@ open build/reports/jacoco/test/html/index.html
 
 **VS Code/Cursor Integration**: Install the **Coverage Gutters** extension to see coverage inline in the editor. After running tests, use `Cmd+Shift+P` → "Coverage Gutters: Display Coverage".
 
+### Mutation Testing (Pitest)
+
+Pitest runs can take several minutes depending on the number of mutations and available CPU/RAM.
+By default, Pitest is configured to run **unit tests only** (`*Test`) and exclude `*IT` integration tests.
+
+```bash
+./gradlew pitest
+```
+
 ## License
 
 Public domain texts from Project Gutenberg. Application code under Apache 2.0.

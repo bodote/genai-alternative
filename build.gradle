@@ -89,7 +89,8 @@ tasks.named('jacocoTestReport') {
 pitest {
 	junit5PluginVersion = '1.2.0'
 	targetClasses = ['de.bas.bodo.genai.*']
-	targetTests = ['de.bas.bodo.genai.*']
+	targetTests = ['de.bas.bodo.genai.*Test']
+	excludedTestClasses = ['.*IT$']
 	outputFormats = ['XML', 'HTML']
 	timestampedReports = false
 	jvmPath = javaToolchains.launcherFor {
